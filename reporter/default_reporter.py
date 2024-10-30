@@ -5,7 +5,7 @@
 import json, os
 
 from instance.problem import StudentPA
-from instance.aggregator import Aggregator
+from reporter.aggregator import Aggregator
 
 class DefaultReporter:
     def __init__(self, results_dir):

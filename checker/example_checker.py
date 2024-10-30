@@ -41,15 +41,6 @@ class ExampleChecker(BaseChecker):
 
                 # check rule by rule
                 for id, rule in tqdm(enumerate(ref_solution.rules), desc="Checking rules", total=len(ref_solution.rules)):
-                    # inputs = format_inputs(
-                    #     ref_problem.problem,
-                    #     ref_solution,
-                    #     student_solution,
-                    #     id,
-                    # )
-                    # # call the grading api
-                    # response = completion_messages(inputs, self.grading_key)
-
                     inputs = format_openai_inputs(
                         ref_problem.problem,
                         ref_solution,

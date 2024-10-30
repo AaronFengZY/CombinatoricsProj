@@ -16,4 +16,4 @@ class BaseChecker(ABC):
 
     @abstractmethod
     def check(self, ref_pa, student_pa):
-        pass
+        return student_pa
