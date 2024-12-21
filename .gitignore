@@ -1,6 +1,10 @@
-# **/data
+# Ignore all .json and .tex files
+*.json
+*.tex
+
+# Existing ignore patterns
+**/data
 **/results
 **/configs
 api_config.json
-
 **/__pycache__
