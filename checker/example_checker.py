@@ -23,7 +23,7 @@ class ExampleChecker(BaseChecker):
         response = response.strip("```json").strip("```").replace("\\", "\\\\").replace("\\\\\\\\", "\\\\")
         response = json.loads(response)
         process = response["process"]
-        score = int(response["score"])
+        score = response["score"]
         return process, score
 
     def check(self, ref_pa, student_pa):
@@ -48,6 +48,7 @@ class ExampleChecker(BaseChecker):
                         student_solution,
                         id,
                     )
+
                     response = openai_completion(**inputs)
 
                     process, score = self.parse_grading_response(response)
