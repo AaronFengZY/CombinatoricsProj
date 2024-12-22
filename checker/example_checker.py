@@ -40,6 +40,14 @@ class ExampleChecker(BaseChecker):
                 ref_solution = ref_subproblem.solutions[solution_id]
                 student_solution.set_solution(ref_solution.answer, solution_id)
 
+                # num_solutions = len(ref_subproblem.solutions)
+                # print(f"Number of solutions for subproblem {subproblem_id}: {num_solutions}")
+                # for i, solution in enumerate(ref_subproblem.solutions):
+                #     print(f"Solution {i}: {solution.answer}")
+                
+                # while (True):
+                #     pass
+
                 # check rule by rule
                 for id, rule in tqdm(enumerate(ref_solution.rules), desc="Checking rules", total=len(ref_solution.rules)):
                     inputs = format_openai_inputs(
