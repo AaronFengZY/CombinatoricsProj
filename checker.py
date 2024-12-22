@@ -37,7 +37,7 @@ def main():
 
             # Construct paths
             ref_path = os.path.join(base_path, hw_base, "ref/ref.json")
-            student_path = os.path.join(base_path, hw_base, f"testcase/{student_id}.json")
+            student_path = os.path.join(base_path, hw_base, f"testcases/{student_id}.json")
 
             # Ensure required files exist
             if not os.path.exists(ref_path):
