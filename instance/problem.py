@@ -54,6 +54,9 @@ class StudentSolution:
         self.correct_answer = None
 
         self.trace = None
+        
+        self.final_graded_score = 0  # New attribute
+        self.total_score = 0  # New attribute
 
     def __str__(self):
         return f"{self.answer}"
@@ -79,6 +82,18 @@ class StudentSolution:
         
         self.status = GradingStatus.graded
 
+    def calculate_final_scores(self):
+        """
+        Calculate the final graded score and the full score (sum of all rule scores).
+        """
+        if not self.rules:  # No rules available
+            self.final_graded_score = 0
+            self.total_score = 0
+            return
+
+        self.final_graded_score = sum(rule.graded_score for rule in self.rules)
+        self.total_score = sum(rule.score for rule in self.rules)
+
     def to_dict(self):
         return {
             "subproblem_id": self.subproblem_id,
@@ -87,7 +102,9 @@ class StudentSolution:
             "rules": [rule.to_dict() for rule in self.rules],
             "solution_id": self.solution_id,
             "correct_answer": self.correct_answer,
-            "trace": self.trace
+            "trace": self.trace,
+            "final_graded_score": self.final_graded_score,
+            "total_score": self.total_score
         }
     
     @staticmethod

@@ -4,6 +4,7 @@
 
 import json
 from collections import Counter
+import concurrent.futures
 
 from checker.base import BaseChecker
 from instance.problem import *
@@ -14,7 +15,7 @@ from utils.apis.dify_api import completion_messages
 from utils.apis.openai_api import openai_completion
 
 
-class ExampleChecker(BaseChecker):
+class Checker(BaseChecker):
     def __init__(self, grading_key=None):
         self.grading_key = grading_key
 
@@ -46,11 +47,6 @@ class ExampleChecker(BaseChecker):
                     # We will create a temporary StudentSolution-like object to hold
                     # the results for this particular solution_id
                     temp_student_solution = student_problem.answers[subproblem_id]
-                    # Some code bases let you do something like:
-                    # temp_student_solution = copy.deepcopy(student_problem.answers[subproblem_id])
-                    # if you have a specific factory/constructor, adapt as needed
-
-                    # Set the official reference answer text (if needed) so it can be used in scoring
                     temp_student_solution.set_solution(ref_solution.answer, solution_id)
 
                     # Now check each rule
@@ -62,42 +58,55 @@ class ExampleChecker(BaseChecker):
                             rule_index
                         )
 
-                        # 进行 num_responses 次采样
+                        # 并发地进行 num_responses 次采样
                         attempts = []
-                        for _ in range(num_responses):
-                            response = openai_completion(**inputs)
-                            process, score = self.parse_grading_response(response)
-                            attempts.append((process, score))
 
-                        # 多数投票
+                        # We'll use ThreadPoolExecutor for I/O-bound parallelism
+                        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+                            # Submit each openai call as a separate future
+                            future_list = [
+                                executor.submit(openai_completion, **inputs)
+                                for _ in range(num_responses)
+                            ]
+                            
+                            # Collect the results as they complete
+                            for future in concurrent.futures.as_completed(future_list):
+                                response = future.result()
+                                process, score = self.parse_grading_response(response)
+                                attempts.append((process, score))
+
+                        majority_threshold = num_responses // 2 + 1
+
+                        # Determine if any score appears more than half the time
                         scores = [item[1] for item in attempts]
                         score_counter = Counter(scores)
                         most_common_score, count = score_counter.most_common(1)[0]
 
-                        if count >= 2:
+                        if count >= majority_threshold:
                             final_score = most_common_score
+                            # Select one process associated with the final score
                             final_process = [item[0] for item in attempts if item[1] == final_score][0]
                         else:
                             final_score = 0
-                            final_process = "无法确定评分结果：三次评分均不同，请人工审核。"
+                            final_process = "无法确定评分结果：没有得分出现超过半数，请人工审核。"
                             temp_student_solution.set_error(
-                                f"无法确定评分结果：三次评分不一致，规则：{rule.rule}"
+                                f"无法确定评分结果：没有得分出现超过半数，规则：{rule.rule}"
                             )
 
-                        # 验证分数有效性
+                        # verify the score is valid
                         if not rule.check_valid_score(final_score):
                             temp_student_solution.set_error(
                                 f"Invalid score {final_score} for rule {rule.rule} (max {rule.score})"
                             )
 
-                        # 保存得分与过程
+                        # save the result
                         temp_student_solution.add_score(rule, final_process, final_score)
 
                     # 对本 solution_id 计算/汇总小题总分
                     temp_student_solution.finalize(ref_solution.rules)
                     total_score = temp_student_solution.get_total_score()  # Or however you compute total
 
-                    # 如果当前总分更高，就将它设为最佳解
+                    # 如果当前总分更高，就将它设为最佳解, 尽可能多给学生分数
                     if total_score > best_solution_score:
                         best_solution_score = total_score
                         best_solution_id = solution_id
@@ -158,5 +167,7 @@ class ExampleChecker(BaseChecker):
                 else:
                     # No valid solutions found
                     student_problem.answers[subproblem_id].set_error("No valid solutions could be found")
+
+                student_problem.answers[subproblem_id].calculate_final_scores()
 
         return student_pa

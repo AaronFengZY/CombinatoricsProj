@@ -3,7 +3,7 @@ import sys
 import json
 from instance.problem import StudentPA
 from instance.ref_problem import RefPA
-from checker.checker import ExampleChecker
+from checker.checker import Checker
 from reporter.default_reporter import DefaultReporter
 
 def main():
@@ -34,7 +34,7 @@ def main():
             filter_student_ids.append(arg)
 
     # Initialize checker and reporter
-    checker = ExampleChecker()
+    checker = Checker()
     base_path = os.path.dirname(os.path.realpath(__file__))
 
     for hw_base, student_ids in config_data.items():

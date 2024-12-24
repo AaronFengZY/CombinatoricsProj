@@ -12,6 +12,9 @@ class DefaultReporter:
         self.results_dir = results_dir
 
     def generate_json_report(self, student_pa, output_file):
+
+        
+
         output_file = os.path.join(self.results_dir, output_file)
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
