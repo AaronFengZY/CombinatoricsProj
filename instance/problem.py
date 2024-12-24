@@ -129,6 +129,15 @@ class StudentSolution:
             graded_score += rule.graded_score
             total_score += rule.score
         return graded_score, total_score
+
+    def get_total_score(self):
+        """
+        Returns the student's final (graded) total score.
+        If the subproblem is not graded or has errors, return 0 by default.
+        """
+        graded_score, total_score = self.summarize()
+        # If 'graded_score' is None => ungraded/error => return 0
+        return graded_score if graded_score is not None else 0
     
 # for problem
 class StudentProblem:

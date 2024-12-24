@@ -3,7 +3,7 @@ import sys
 import json
 from instance.problem import StudentPA
 from instance.ref_problem import RefPA
-from checker.example_checker import ExampleChecker
+from checker.checker import ExampleChecker
 from reporter.default_reporter import DefaultReporter
 
 def main():
@@ -20,9 +20,18 @@ def main():
     os.environ["OPENAI_API_KEY"] = api_configs["api_key"]
     os.environ["OPENAI_BASE_URL"] = api_configs["base_url"]
 
-    # Parse command-line arguments for filtering
-    filter_hw_base = sys.argv[1] if len(sys.argv) > 1 else None
-    filter_student_ids = sys.argv[2:] if len(sys.argv) > 2 else None
+    # Parse command-line arguments for filtering and hyperparameters
+    filter_hw_base = None
+    filter_student_ids = []
+    num_responses = 1  # Default to 1 response per question
+
+    for arg in sys.argv[1:]:
+        if arg.startswith("--hw_base="):
+            filter_hw_base = arg.split("=", 1)[1]
+        elif arg.startswith("--num_responses="):
+            num_responses = int(arg.split("=", 1)[1])
+        else:
+            filter_student_ids.append(arg)
 
     # Initialize checker and reporter
     checker = ExampleChecker()
@@ -34,6 +43,12 @@ def main():
         for student_id in student_ids:
             if filter_student_ids and student_id not in filter_student_ids:
                 continue
+            
+            # Divider line for clarity in output
+            print("-" * 60)
+            
+            # Illustrative example for testing hw_base and student_id
+            print(f"Testing hw_base: {hw_base}, student_id: {student_id}")
 
             # Construct paths
             ref_path = os.path.join(base_path, hw_base, "ref/ref.json")
@@ -50,7 +65,7 @@ def main():
             # Load and check
             ref_pa = RefPA.from_json(ref_path)
             student_pa = StudentPA.load_raw(student_path)
-            student_pa = checker.check(ref_pa, student_pa)
+            student_pa = checker.check(ref_pa, student_pa, num_responses=num_responses)
 
             # Generate reports
             results_dir = os.path.join(base_path, hw_base, "results")
