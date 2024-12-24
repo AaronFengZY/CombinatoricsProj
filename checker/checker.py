@@ -72,6 +72,7 @@ class Checker(BaseChecker):
                             # Collect the results as they complete
                             for future in concurrent.futures.as_completed(future_list):
                                 response = future.result()
+                                # print(f"response: {response}")
                                 process, score = self.parse_grading_response(response)
                                 attempts.append((process, score))
 
