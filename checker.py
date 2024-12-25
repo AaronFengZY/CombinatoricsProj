@@ -3,7 +3,8 @@ import sys
 import json
 from instance.problem import StudentPA
 from instance.ref_problem import RefPA
-from checker.checker import Checker
+from DocToolbox.checker import Checker
+from DocToolbox.PDFRetriever import PDFRetriever
 from reporter.default_reporter import DefaultReporter
 
 def main():
@@ -33,8 +34,14 @@ def main():
         else:
             filter_student_ids.append(arg)
 
+    pdf_path = "/home/v-zhifeng/HPE/CombinatoricsProj/combinatorics.pdf"
+    pdf_retriever = PDFRetriever(pdf_path)
+    pdf_retriever.extract_text()
+    pdf_retriever.embed_chunks()
+    pdf_retriever.build_index()
+
     # Initialize checker and reporter
-    checker = Checker()
+    checker = Checker(pdf_retriever=pdf_retriever)
     base_path = os.path.dirname(os.path.realpath(__file__))
 
     for hw_base, student_ids in config_data.items():
