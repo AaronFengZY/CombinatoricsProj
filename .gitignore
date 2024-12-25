@@ -1,10 +1,17 @@
 # Ignore all .json and .tex files
-*.json
+# *.json
+*.log
+*.pdf
+*.aux
+*.gz
 *.tex
+*.fls
+*.fdb_latexmk
+*.csv
 
 # Existing ignore patterns
-**/data
-**/results
+# **/data
+# **/results
 **/configs
-api_config.json
+# api_config.json
 **/__pycache__
