@@ -28,7 +28,7 @@ import faiss
 import os
 
 class PDFRetriever:
-    def __init__(self, pdf_path, embedding_model='all-MiniLM-L6-v2', index_path='index.faiss'):
+    def __init__(self, pdf_path, embedding_model='distiluse-base-multilingual-cased-v2', index_path='index.faiss'):
         self.pdf_path = pdf_path
         self.embedding_model = SentenceTransformer(embedding_model)
         self.index_path = index_path
@@ -38,8 +38,31 @@ class PDFRetriever:
 
     def extract_text(self):
         reader = PdfReader(self.pdf_path)
+        raw_text = []
         for page in reader.pages:
-            self.chunks.extend(page.extract_text().split('\n'))
+            page_text = page.extract_text()
+            if page_text:
+                raw_text.append(page_text)
+        # Join pages then split or directly chunk by page
+        text = "\n".join(raw_text)
+        # Optional: use a custom chunk function for Chinese
+        self.chunks = self.split_text_chinese(text, chunk_size=300, overlap=30)
+
+    def split_text_chinese(self, text, chunk_size=300, overlap=30):
+        # 1) Optional: segment or tokenize first if desired
+        # tokens = jieba.lcut(text.replace("\n", ""))
+        # text = " ".join(tokens)
+
+        # 2) Simple chunking by character count
+        chunks = []
+        start = 0
+        while start < len(text):
+            end = min(start + chunk_size, len(text))
+            chunks.append(text[start:end])
+            start = end - overlap
+            if start < 0:
+                start = 0
+        return chunks
 
     def embed_chunks(self):
         self.chunk_embeddings = self.embedding_model.encode(self.chunks, convert_to_numpy=True)

@@ -43,13 +43,25 @@ class Checker(BaseChecker):
                 best_solution_obj = None
                 best_solution_score = -1  # track the highest total score
 
+                # Use the problem statement (or any other text) as the "query"
                 query = ref_problem.problem
-                if self.pdf_retriever:
-                    relevant_content = self.pdf_retriever.retrieve(query)
-                    print(f"Relevant content from PDF for query '{query}':\n")
-                    for content in relevant_content:
-                        print(f"- {content}")
 
+                # ---------------------------------------------------------
+                # RAG Step: retrieve relevant chunks from your PDF
+                # ---------------------------------------------------------
+                if self.pdf_retriever:
+                    # Depending on your retriever’s API, you might use:
+                    relevant_docs = self.pdf_retriever.get_relevant_documents(query)
+
+                    # print(f"\nRelevant content from PDF for query '{query}':")
+                    # for i, doc in enumerate(relevant_docs, start=1):
+                    #     # doc could be a Document object, so doc.page_content may hold text
+                    #     print(f"Part {i}. {doc.page_content}...")
+
+                    #     print("---")
+                    context_text = ""
+                    for doc in relevant_docs:
+                        context_text += doc.page_content + "\n\n"
 
                 # Check each reference solution under this sub-problem
                 for solution_id, ref_solution in enumerate(ref_subproblem.solutions):
@@ -58,20 +70,14 @@ class Checker(BaseChecker):
                     temp_student_solution = student_problem.answers[subproblem_id]
                     temp_student_solution.set_solution(ref_solution.answer, solution_id)
 
-                    print(f"ref_subproblem: {ref_subproblem}")
-                    print(f"ref_problem: {ref_problem}")
-
-                    while (True):
-                        pass
-
-
                     # Now check each rule
                     for rule_index, rule in enumerate(ref_solution.rules):
                         inputs = format_openai_inputs(
                             ref_problem.problem,
                             ref_solution,
                             temp_student_solution,
-                            rule_index
+                            rule_index,
+                            context_text
                         )
 
                         # 并发地进行 num_responses 次采样

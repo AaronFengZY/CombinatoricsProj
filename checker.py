@@ -1,11 +1,42 @@
 import os
 import sys
 import json
+import time
+import random
+import openai
 from instance.problem import StudentPA
 from instance.ref_problem import RefPA
 from DocToolbox.checker import Checker
 from DocToolbox.PDFRetriever import PDFRetriever
+from langchain.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+from langchain.docstore.document import Document
 from reporter.default_reporter import DefaultReporter
+from langchain.embeddings import HuggingFaceEmbeddings  # or OpenAIEmbeddings if you used that
+from langchain.vectorstores import FAISS
+import pdfplumber
+
+def load_faiss_retriever():
+    # Make sure the embedding model is the same one used during saving.
+    embeddings = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
+    
+    # Load the index from local files
+    index_path = "/home/v-zhifeng/HPE/CombinatoricsProj/faiss_index"
+    if not os.path.isdir(index_path):
+        raise ValueError(f"FAISS index folder not found at {index_path}.")
+
+    db = FAISS.load_local(
+        index_path,
+        embeddings,
+        allow_dangerous_deserialization=True
+    )
+    
+    # Build a retriever
+    retriever = db.as_retriever(search_kwargs={"k": 3})
+    print("PDF Retriever loaded from FAISS index.")
+    return retriever
 
 def main():
     # Load the configuration file containing hw_base and student_id mappings
@@ -34,14 +65,23 @@ def main():
         else:
             filter_student_ids.append(arg)
 
-    pdf_path = "/home/v-zhifeng/HPE/CombinatoricsProj/combinatorics.pdf"
-    pdf_retriever = PDFRetriever(pdf_path)
-    pdf_retriever.extract_text()
-    pdf_retriever.embed_chunks()
-    pdf_retriever.build_index()
+    # Create retriever (same as before)
+    retriever = load_faiss_retriever()
+    print("PDF Retriever initialized.")
+
+    # # Now you can use the retriever to fetch relevant documents
+    # query = "请给我这本书的主要内容概括？"
+    # results = retriever.get_relevant_documents(query)
+
+    # for i, doc in enumerate(results, start=1):
+    #     print(f"--- Result {i} ---")
+    #     print(doc.page_content[:200], '...')  # Print just the first 200 characters
+
+    # while(True):
+    #     pass
 
     # Initialize checker and reporter
-    checker = Checker(pdf_retriever=pdf_retriever)
+    checker = Checker(pdf_retriever=retriever)
     base_path = os.path.dirname(os.path.realpath(__file__))
 
     for hw_base, student_ids in config_data.items():
