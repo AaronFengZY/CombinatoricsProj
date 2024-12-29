@@ -6,7 +6,7 @@ data_dir = "/home/v-zhifeng/HPE/CombinatoricsProj/data"
 config_path = "/home/v-zhifeng/HPE/CombinatoricsProj/hw_base_student_config.json"
 
 # Exclude specific directories
-excluded_dirs = {"ai_judge_dist"}
+excluded_dirs = {"ai_judge_dist","ai_judge_dist2_1227"}
 
 # Load existing configuration
 if not os.path.exists(config_path):
