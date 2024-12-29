@@ -69,17 +69,6 @@ def main():
     retriever = load_faiss_retriever()
     print("PDF Retriever initialized.")
 
-    # # Now you can use the retriever to fetch relevant documents
-    # query = "请给我这本书的主要内容概括？"
-    # results = retriever.get_relevant_documents(query)
-
-    # for i, doc in enumerate(results, start=1):
-    #     print(f"--- Result {i} ---")
-    #     print(doc.page_content[:200], '...')  # Print just the first 200 characters
-
-    # while(True):
-    #     pass
-
     # Initialize checker and reporter
     checker = Checker(pdf_retriever=retriever)
     base_path = os.path.dirname(os.path.realpath(__file__))

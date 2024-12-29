@@ -1,0 +1,147 @@
+{
+  "6.1": {
+    "problem": "构造组合计数场景，解释以下恒等式的组合意义： % \\begin{enumerate}[label={\\rm (\\arabic*)}] \\item $\\binom{n - m}{n - k} = \\sum_{j = 0}^m (-1)^j \\binom{m}{j} \\binom{n - j}{k}$ 构造组合计数场景，解释以下恒等式的组合意义： \\item $\\binom{n - 1}{m - 1} = \\sum_{j = 0}^{m} (-1)^j \\binom{m}{j} \\binom{n + m - j - 1}{n}$ 构造组合计数场景，解释以下恒等式的组合意义： \\item $\\binom{n + m - 1}{n - 1} = \\sum_{j = 0}^m (-1)^j \\binom{n + m}{n + j}$ \\end{enumerate}",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "定义全集${U}$表示从$1,2,\\dots,n$中选出$k$个数字的种数，再定义$A_i(i=1,2,\\dots, m)$表示$\\mathbb{U}$中必须包含$i$的种数，显然有: \\begin{equation} |A_1 \\cap A_2 \\cap \\dots \\cap A_m| = \\binom{n-m}{k-m} = \\binom{n-m}{n-k} \\end{equation} \\par 由容斥原理可得： \\begin{equation} |A_1 \\cap A_2 \\cap \\dots \\cap A_m| = |U| - \\sum_i|\\complement_UA_i|+\\sum_{i<j}|\\complement_UA_i \\cap \\complement_UA_j| - \\dots \\end{equation} 我们很容易得知： \\begin{equation} \\sum_{i_1 < i_2 < \\dots < i_j}|\\complement_UA_{i_1} \\cap \\complement_UA_{i_2} \\cap \\dots \\cap \\complement_UA_{i_j}| = \\binom{m}{j}\\binom{n-j}{k} \\end{equation} 从而我们可以得到： \\begin{equation} |A_1 \\cap A_2 \\cap \\dots \\cap A_m| = \\sum_{j=0}^m(-1)^j\\binom{m}{j}\\binom{n-j}{k} \\end{equation} 综合(1)(4)我们的恒等式得证",
+          "rules": [
+            {
+              "rule": "得出左侧组合意义",
+              "score": 1
+            },
+            {
+              "rule": "右侧组合数的组合意义",
+              "score": 1
+            },
+            {
+              "rule": "应用容斥原理",
+              "score": 1
+            }
+          ]
+        }
+      ],
+      "(2)": [
+        {
+          "answer": "设 $U$ 是从 $\\{1,2,\\cdots,n,\\cdots,n+m-1\\}$ 中选 $m-1$ 个数的方案，$A_i(1\\le i\\le m)$ 是选择数 $i$ 后的方案，则 $|\\bar A_1\\cap\\cdots\\cap \\bar A_m|$ 为从剩下 $n-1$ 个数中选 $m-1$ 个数的方案数，为 $\\dbinom{n-1}{m-1}$，而 $|A_i|=\\dbinom{n+m-2}{m-2},|A_{i_1}\\cap\\cdots\\cap A_{i_j}|=\\dbinom{n+m-j-1}{m-j-1}$，从而有 $|\\bar A_1\\cap\\cdots\\cap \\bar A_m|=|U|-\\sum|A_i|+\\sum|A_i\\cap A_j|+\\cdots+(-1)^j\\sum |A_{i_1}\\cap\\cdots\\cap A_{i_j}|$ 即 $\\dbinom{n-1}{m-1}=\\displaystyle\\sum_{j=0}^m(-1)^j\\dbinom{m}{j}\\dbinom{n+m-j-1}{n}$",
+          "rules": [
+            {
+              "rule": "得出左侧组合意义",
+              "score": 1
+            },
+            {
+              "rule": "右侧组合数的组合意义",
+              "score": 1
+            },
+            {
+              "rule": "应用容斥原理",
+              "score": 1
+            }
+          ]
+        }
+      ],
+      "(3)": [
+        {
+          "answer": "考虑n+m-1个球，从中选m个的方案数是$C_{n+m-1}^m = C_{n + m - 1}^{n - 1}$ 从另外一种角度考虑，增加一个0号球，那么选m个的方案数是$C_{n+m}^m$，但这可能会选到0号球。于是减去“选0号球，然后所有球里面选m-1个”的方案数$C_{n+m}^{m-1}$，但这可能会再次选到0号球，因此加上选了两次0号球的方案数$C_{n+m}^{m-2}$... 因此总方案数是$\\sum_{j=0}^m (-1)^j C_{n + m}^{m-j}$ 故 $$ C_{n + m - 1}^{n - 1} = C_{n+m-1}^m= \\sum_{j=0}^m (-1)^j C_{n + m}^{m-j}=\\sum_{j=0}^m (-1)^j C_{n + m}^{n + j} $$",
+          "rules": [
+            {
+              "rule": "得出左侧组合意义",
+              "score": 1
+            },
+            {
+              "rule": "右侧组合数的组合意义",
+              "score": 1
+            },
+            {
+              "rule": "应用容斥原理",
+              "score": 1
+            },
+            {
+              "rule": "能说明清楚为什么容斥没有组合数系数",
+              "score": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "6.2": {
+    "problem": "考虑$\\left\\{ 3 \\dotp a, \\; 3 \\dotp b, \\; 3 \\dotp c \\right\\}$的多重排列。 % \\begin{enumerate}[label={\\rm (\\arabic*)}] \\item 若任何连续$3$个元素不能全相同，求满足要求的排列数目； 考虑$\\left\\{ 3 \\dotp a, \\; 3 \\dotp b, \\; 3 \\dotp c \\right\\}$的多重排列。 \\item 若任何相邻$2$个元素不能相同，求满足要求的排列数目。 \\end{enumerate}",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "首先不考虑限制的情况：${9! \\over 3!3!3!}$ 设$A_3$表示存在连续3个a的方案集合，$B_3$表示存在连续3个b的方案集合，$C_3$表示存在连续3个c的方案集合 对$|A_3|, |B_3|, |C_3|$： 将aaa看成一个字母，故$|A_3|= {7! \\over 1!3!3!}= 140 $ 对$|A_3\\bigcap B_3|, |A_3\\bigcap C_3|, |C_3\\bigcap B_3|$ ： 将aaa bbb分别看成一个字母，故$|A_3\\bigcap B_3| = {5! \\over 1!1!3!}=20$ 对$|A_3\\bigcap B_3\\bigcap C_3|$ ： 将aaa bbb ccc分别看成一个字母，故$|A_3\\bigcap B_3\\bigcap C_3| = {3! \\over 1!1!1!}=6$ 总方案数为 $$ {9! \\over 3!3!3!} - 3*140+20*3-6= 1680 - 420 + 60 - 6 = 1314 $$",
+          "rules": [
+            {
+              "rule": "定义集合",
+              "score": 1
+            },
+            {
+              "rule": "容斥原理",
+              "score": 2
+            },
+            {
+              "rule": "答案正确",
+              "score": 1
+            }
+          ]
+        }
+      ],
+      "(2)": [
+        {
+          "answer": "暂时将每个元素均视为不同的，考虑以下九个条件： \\begin{itemize} \\item $A_1$: $a_2,a_3$ 相邻； \\item $A_2$: $a_3,a_1$ 相邻； \\item $A_3$: $a_1,a_2$ 相邻； \\item $B_1$: $b_2,b_3$ 相邻； \\item \\ldots \\end{itemize} 我们把 $A_1,A_2,A_3$ 称为一组，$B_1,B_2,B_3$ 称为一组，$C_1,C_2,C_3$ 称为一组。注意到同一组中的三个条件，如 $A_1,A_2,A_3$ 不可能同时满足，即 $a_1,a_2,a_3$ 不可能两两相邻。我们需要通过容斥原理，求出九个条件均不满足的方案数。 首先考虑满足一个条件的方案数。我们可以将相邻的那两个元素视为一个整体，这个“整体”内部有两种顺序，故方案数为 $9\\times 2\\times (2+3+3)!=18\\times8!$。 接下来考虑满足两个条件的方案数。如果两个条件处于同一组，即形如 $A_1,A_2$，那么对应的三个元素连续出现。以 $A_1,A_2$ 为例，那么三个 a 会连续出现，且顺序为 $a_2,a_3,a_1$ 或 $a_1,a_3,a_2$。故总方案数为 $3\\times\\binom{3}{2}\\times2\\times(1+3+3)!=18\\times 7!$。如果两个条件不处于同一组，方案数为 $\\binom{3}{2}\\times\\binom{3}{1}\\times\\binom{3}{1}\\times 2\\times 2\\times (2+2+3)!=108\\times 7!$。 接下来考虑满足三个条件的方案数。由于同一组中的三个条件（形如 $A_1,A_2,A_3$）不可能同时满足，所以这三个条件一定分布在两组或三组中。如果是两组，根据前文的做法，我们可以计算出总方案数为 \\begin{equation} 3\\times 2\\times\\binom{3}{2}\\times\\binom{3}{1}\\times 2\\times 2\\times(1+2+3)!=216\\times 6!. \\end{equation} 如果是三组，方案数为 \\begin{equation} \\binom{3}{1}\\times\\binom{3}{1}\\times\\binom{3}{1}\\times 2\\times 2\\times 2\\times(2+2+2)!=216\\times 6!. \\end{equation} 接下来考虑满足四个条件的方案数，同理，这四个条件应该形如 $A_i,A_j,B_u,B_v$ 或 $A_i,A_j,B_u,C_v$。如果是前者，方案数为 \\begin{equation} \\binom{3}{2}\\times\\binom{3}{2}\\times\\binom{3}{2}\\times2\\times 2\\times(1+1+3)!=108\\times 5!. \\end{equation} 如果是后者，方案数为 \\begin{equation} 3\\times\\binom{3}{2}\\times\\binom{3}{1}\\times\\binom{3}{1}\\times 2\\times 2\\times 2\\times(1+2+2)!=648\\times 5!. \\end{equation} 接下来考虑满足五个条件的方案数，此时这五个条件一定形如 $A_i,A_j,B_u,B_v,C_w$，方案数为 \\begin{equation} 3\\times\\binom{3}{2}\\times\\binom{3}{2}\\times\\binom{3}{1}\\times 2\\times 2\\times 2\\times(1+1+2)!=648\\times 4!. \\end{equation} 满足六个条件时，方案数为 \\begin{equation} \\binom{3}{2}\\times \\binom{3}{2}\\times \\binom{3}{2}\\times 2\\times 2\\times 2\\times(1+1+1)!=216\\times 3!. \\end{equation} 由容斥原理，可得没有条件被满足时，总方案数为 \\begin{align} &\\quad 9!-18\\times 8!+18\\times 7!+108\\times 7!-216\\times 6!-216\\times 6! \\\\ &\\quad+108\\times 5!+648\\times 5!-648\\times 4!+216\\times 3! \\\\ &=37584. \\end{align} 现在去除相同字母内部的顺序，可得总方案数为 \\begin{equation} \\frac{37584}{3!3!3!}=174. \\end{equation}",
+          "rules": [
+            {
+              "rule": "捆绑aa,bb,cc并容斥",
+              "score": 2
+            },
+            {
+              "rule": "考虑到aaa,bbb,ccc的情况并容斥",
+              "score": 2
+            },
+            {
+              "rule": "答案正确",
+              "score": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "6.3": {
+    "problem": "求方程 % \\begin{equation*} x_1 + x_2 + x_3 = 40 \\qquad (6 \\leq x_1 \\leq 15, \\; 5 \\leq x_2 \\leq 20, \\; 10 \\leq x_3 \\leq 25) \\end{equation*} % 的整数解数目。",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "记 $x_1=y_1+5,x_2=y_2+4,x_3=y_3+9$，则 \\begin{equation} 40=x_1+x_2+x_3=y_1+y_2+y_3+5+4+9=y_1+y_2+y_3+18. \\end{equation} 故 $y_1+y_2+y_3=22$，且 $1\\le y_1\\le 10,1\\le y_2\\le 16,1\\le y_3\\le 16$。 不考虑上界时，解共有 \\begin{equation} \\binom{22-1}{3-1}=\\binom{21}{2}=210. \\end{equation} 若 $y_1\\gt 10$，记 $y_1=z_1+10$，则 $z_1\\ge 1$ 且 $z_1+y_2+y_3=12$，此时解的个数共有 \\begin{equation} \\binom{12-1}{3-1}=\\binom{11}{2}=55. \\end{equation} 同理，若 $y_2\\gt 16$，解共有 \\begin{equation} \\binom{22-16-1}{3-1}=\\binom{5}{2}=10. \\end{equation} 同理，若 $y_3\\gt 16$，解共有 10 个。 由于$y_1+y_2+y_3=22\\lt (10+1)+(16+1)$，不可能有至少两个变量超出上界。故原问题的整数解数目为 \\begin{equation} 210-55-10-10=135. \\end{equation}",
+          "rules": [
+            {
+              "rule": "换元正确",
+              "score": 1
+            },
+            {
+              "rule": "计算总情况数",
+              "score": 2
+            },
+            {
+              "rule": "计算一个超出上界的情况",
+              "score": 2
+            },
+            {
+              "rule": "计算两个超出上界的情况",
+              "score": 2
+            },
+            {
+              "rule": "计算三个超出上界的情况",
+              "score": 2
+            },
+            {
+              "rule": "容斥原理得到答案",
+              "score": 1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

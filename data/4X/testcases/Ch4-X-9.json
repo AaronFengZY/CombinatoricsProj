@@ -1,0 +1,35 @@
+{
+  "4.1": {
+    "(1)": "证明\n$$\nG_n - 3G_{n-1} + G_{n-2} = F_{2n} - 3 * F_{2n-2} + F_{2n-4} \\\\ \n= F_{2n-3} + F_{2n-4} - F_{2n-2} = 0\n$$\n因此原式始终成立",
+    "(2)": "证明：\n$$\nG(x) = G_0 + G_1x + G_2 x^2 + ……\n\\\\\n-3xG(x) = -3G_0x  -3G_1x^2 -3G_2x^3 + ……\n\\\\\nx^2G(x) = G_0x^2 + G_1x^3 + G_2x^4 + ……\n\\\\\nG(x)(1-3x-x^2) = x\n\\\\ \nG(x) = \\frac{x}{1-3x-x^2}\n$$"
+  },
+  "4.2": {
+    "(1)": "解答：\n$$\nG(x) = \\frac{1}{1-x + x^2} \n\\\\ (1-x + x^2)G(x) = 1\n\\\\ (设G(x) = \\sum_{n = 0}^{\\infty}a_n x^n代入原式)\n\\\\ \\sum_{n = 0}^{\\infty}a_n x^n - \\sum_{n = 0}^{\\infty}a_n x^{n+1} + \\sum_{n = 0}^{\\infty}a_n x^{n+2} = 1\n\\\\ 也即：a_0 + (a_1 - a_0) x + …… = 1\n\\\\ 所以必然的 a_n -a _{n-1} + a_{n-2} = 0 (a_1 = a_0)\n\\\\ 又因为 a_0 = 1, 所以a_0 = a_1 = 1\n\\\\所以必然的: a_n = a_{n-1} - a_{n-2} (n \\geq 2)\n\\space a_0 = 1, a_1 = 1\n$$"
+  },
+  "4.3": {
+    "(1)": "$$\n(x-3)(x + 1) = 0\n\\\\ 即 x^2 - 2x - 3 = 0 \\\\\n a_n - 2a_{n-1} - 3 a_{n-2} = 0\n$$"
+  },
+  "4.4": {
+    "(1)": "$$\na_n - 2a_{n-1} + a_{n-2} = 5\n$$\n齐次特征方程是：\n$$\nr^2 - 2r + 1 = 0 \n\\\\ 解得:r_1 = r_2 = 1\n\\\\ 通解为 A + Bn\n\\\\ 特解为 C*n^2\n a_n = A + Bn + Cn ^2\n \n \\\\ 代入 a_0 = 1; a_1 = 2; a_2 = 8\n \n \\\\ 解得 a_n = 1 - \\frac{3}{2}n + \\frac{5}{2} n^2\n$$"
+  },
+  "4.5": {
+    "(1)": "设 $G_n$  为不包含”AB” 子串的字符串数目：\n\n递推关系为：$G_n = 4G_{n-1} - G_{n-2} $对应的特征根为$x^2 - 4x + 1 = 0$ 特征根为$2 \\pm \\sqrt3$\n所以$G_n = A(2 + \\sqrt3)^n + B(2 - \\sqrt3)^n$ 代入$G_0 = 1, G_1 = 4$ 得\n$G_n = \\frac{3+ 2\\sqrt3}{6}(2+\\sqrt3)^n + \\frac{3- 2\\sqrt3}{6}(2-\\sqrt3)^n$\n所以结果为 $4^n - \\frac{3+ 2\\sqrt3}{6}(2+\\sqrt3)^n + \\frac{3- 2\\sqrt3}{6}(2-\\sqrt3)^n$"
+  },
+  "4.6": {
+    "(1)": "设 $K(n) = H(n-1) + 1 + H(n-3) + 1 + K(n-3)$\n\n所以$K(n) - K(n-3) = 2^{n-1} + 2^{n-3}$"
+  },
+  "4.7": {
+    "(1)": ""
+  },
+  "4.8": {
+    "(1)": "$$\nS_n = A_0 + A_1 \\begin{pmatrix} n \\ 1 \\end{pmatrix} + A_2 \\begin{pmatrix} n \\ 2 \\end{pmatrix} + A_3 \\begin{pmatrix} n \\ 3 \\end{pmatrix} + A_4\\begin{pmatrix} n \\ 4 \\end{pmatrix} + A_5\\begin{pmatrix} n \\ 5 \\end{pmatrix}\n$$\n\n代入各种初始值，解得\n$$\n\\sum_{k =1 }^{n} k^4 =\\begin{pmatrix} n \\ 1 \\end{pmatrix} + 15\\begin{pmatrix} n \\ 2 \\end{pmatrix} + 50 \\begin{pmatrix} n \\ 3 \\end{pmatrix} + 60\\begin{pmatrix} n \\ 4 \\end{pmatrix} + 24\\begin{pmatrix} n \\ 5 \\end{pmatrix}\n$$"
+  },
+  "4.9": {
+    "(1)": "$f(n,k) = f(n-1, k) + f(n-2, k -1 )$",
+    "(2)": "",
+    "(3)": "$g(n,k) = f(n-2,k) + 2f(n-3,k-1)$\n\ng(n,k) = \\begin{pmatrix} n-k-1 \\ k\\end{pmatrix} + \\begin{pmatrix} n-k-1 \\ k - 1\\end{pmatrix}$"
+  },
+  "4.10": {
+    "(1)": "$ S(n) = 2S(n-1) + S(n-2) $\nS(0) = 1, S(1) = 2 ,解得特征根为$r_1 = 1 + \\sqrt2 ; r2 = 1-\\sqrt2$\n$S(n) = A(1+\\sqrt2)^n + B(1-\\sqrt2)^n$\n根据初始值解出\n\n$A = \\frac{1+\\sqrt2}{2\\sqrt2}; B = \\frac{1-\\sqrt2}{-2\\sqrt2}$\n所以 S(n) = $\\frac{\\sqrt{2}}{4}(1+\\sqrt2)^{n+1} + \\frac{\\sqrt{2}}{4}(1-\\sqrt2)^{n+1}$"
+  }
+}
