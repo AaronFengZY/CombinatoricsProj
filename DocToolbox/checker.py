@@ -35,6 +35,16 @@ class Checker(BaseChecker):
         for problem_id, ref_problem in tqdm(ref_pa.problems.items(), desc="Checking problems", total=len(ref_pa.problems)):
             student_problem = student_pa.problems[problem_id]
 
+            query = ref_problem.problem
+
+            # retrieve relevant documents
+            if self.pdf_retriever:
+                relevant_docs = self.pdf_retriever.get_relevant_documents(query)
+                context_text = ""
+                for doc in relevant_docs:
+                    context_text += doc.page_content + "\n\n"
+
+
             for subproblem_id, ref_subproblem in tqdm(ref_problem.answers.items(), desc="Checking subproblems", total=len(ref_problem.answers)):
                 # ---------------------------------------------------------
                 # Modified part: Evaluate each solution and pick the best
@@ -42,26 +52,6 @@ class Checker(BaseChecker):
                 best_solution_id = None
                 best_solution_obj = None
                 best_solution_score = -1  # track the highest total score
-
-                # Use the problem statement (or any other text) as the "query"
-                query = ref_problem.problem
-
-                # ---------------------------------------------------------
-                # RAG Step: retrieve relevant chunks from your PDF
-                # ---------------------------------------------------------
-                if self.pdf_retriever:
-                    # Depending on your retriever’s API, you might use:
-                    relevant_docs = self.pdf_retriever.get_relevant_documents(query)
-
-                    # print(f"\nRelevant content from PDF for query '{query}':")
-                    # for i, doc in enumerate(relevant_docs, start=1):
-                    #     # doc could be a Document object, so doc.page_content may hold text
-                    #     print(f"Part {i}. {doc.page_content}...")
-
-                    #     print("---")
-                    context_text = ""
-                    for doc in relevant_docs:
-                        context_text += doc.page_content + "\n\n"
 
                 # Check each reference solution under this sub-problem
                 for solution_id, ref_solution in enumerate(ref_subproblem.solutions):
@@ -80,7 +70,7 @@ class Checker(BaseChecker):
                             context_text
                         )
 
-                        # 并发地进行 num_responses 次采样
+                        # Collect multiple responses
                         attempts = []
 
                         # We'll use ThreadPoolExecutor for I/O-bound parallelism
@@ -129,7 +119,7 @@ class Checker(BaseChecker):
                     temp_student_solution.finalize(ref_solution.rules)
                     total_score = temp_student_solution.get_total_score()  # Or however you compute total
 
-                    # 如果当前总分更高，就将它设为最佳解, 尽可能多给学生分数
+                    # Check if this solution is the best so far, the one with the highest total score
                     if total_score > best_solution_score:
                         best_solution_score = total_score
                         best_solution_id = solution_id

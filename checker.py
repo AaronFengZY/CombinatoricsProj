@@ -1,18 +1,10 @@
 import os
 import sys
 import json
-import time
-import random
-import openai
 from instance.problem import StudentPA
 from instance.ref_problem import RefPA
 from DocToolbox.checker import Checker
-from DocToolbox.PDFRetriever import PDFRetriever
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
-from langchain.docstore.document import Document
 from reporter.default_reporter import DefaultReporter
 from langchain.embeddings import HuggingFaceEmbeddings  # or OpenAIEmbeddings if you used that
 from langchain.vectorstores import FAISS
@@ -34,13 +26,13 @@ def load_faiss_retriever():
     )
     
     # Build a retriever
-    retriever = db.as_retriever(search_kwargs={"k": 3})
+    retriever = db.as_retriever(search_kwargs={"k": 4}) # or any other search parameters, I pick 4, cause it's a good right now
     print("PDF Retriever loaded from FAISS index.")
     return retriever
 
 def main():
     # Load the configuration file containing hw_base and student_id mappings
-    config_file = "hw_base_student_config.json"
+    config_file = "./data/hw_base_student_config.json"
     if not os.path.exists(config_file):
         raise FileNotFoundError(f"Configuration file '{config_file}' not found.")
 

@@ -3,7 +3,7 @@ import json
 
 # Paths
 data_dir = "/home/v-zhifeng/HPE/CombinatoricsProj/data"
-config_path = "/home/v-zhifeng/HPE/CombinatoricsProj/hw_base_student_config.json"
+config_path = "/home/v-zhifeng/HPE/CombinatoricsProj/data/hw_base_student_config.json"
 
 # Exclude specific directories
 excluded_dirs = {"ai_judge_dist","ai_judge_dist2_1227"}
