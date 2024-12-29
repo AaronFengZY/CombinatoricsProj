@@ -1,0 +1,77 @@
+{
+    "Ch4-X-1": {
+        "file_type": "latex",
+        "score": 9.7,
+        "comment": "基本，4.7 系数有误 -2，4.10 （1）系数有误 -1，分数按/10给出"
+    },
+    "Ch4-X-2": {
+        "file_type": "latex",
+        "score": 8.7,
+        "comment": "基本，4.1 （2）有误 -1，4.7 系数有误，结果有误 -2，4.8 错误 -10，分数按/10给出"
+    },
+    "Ch4-X-3": {
+        "file_type": "latex",
+        "score": 10,
+        "comment": "基本，分数按/10给出"
+    },
+    "Ch4-X-4": {
+        "file_type": "latex",
+        "score": 9.5,
+        "comment": "基本，4.10 （2）错误 -5"
+    },
+    "Ch4-X-5": {
+        "file_type": "latex",
+        "score": 5.5,
+        "comment": "基本，4.5 错误 -10，4.6 错误 -10，4.7 没有计算 -5，4.8 错误 -10，4.10错误 -10，进阶没写完算基本"
+    },
+    "Ch4-X-6": {
+        "file_type": "md",
+        "score": 8.8,
+        "comment": "4.7 答案计算错误 -2，4.10 （1）错误（2）没有完成 -10"
+    },
+    "Ch4-X-7": {
+        "file_type": "md",
+        "score": 9.8,
+        "comment": "4.1 （2）计算错误 -2"
+    },
+    "Ch4-X-8": {
+        "file_type": "latex",
+        "score": 6.6,
+        "comment": "4.5 递推关系有问题 -10，4.6 递推关系有问题 -10，4.7 系数错误 -2，4.8 系数错误 -2，4.10 （1）递推关系错误，（2）也错误 -10"
+    },
+    "Ch4-X-9": {
+        "file_type": "md",
+        "score": 6.9,
+        "comment": "4.6 错误 -10，4.7 没有做 -10，4.9 （3）最终答案有误 -1，4.10 （1）错误（2）没有做 -10"
+    },
+    "Ch4-X-10": {
+        "file_type": "md",
+        "score": 8.8,
+        "comment": "4.7 系数没有算 -2，4.10 错误 -10"
+    },
+    "Ch4-X-11": {
+        "file_type": "latex",
+        "score": 9,
+        "comment": "基本，4.10 错误 -10"
+    },
+    "Ch4-X-12": {
+        "file_type": "latex",
+        "score": 9.5,
+        "comment": "4.10 （2）错误 -5"
+    },
+    "Ch4-X-13": {
+        "file_type": "latex",
+        "score": 10,
+        "comment": "分数按/10给出"
+    },
+    "Ch4-X-14": {
+        "file_type": "latex",
+        "score": 10,
+        "comment": "分数按/10给出"
+    },
+    "Ch4-X-15": {
+        "file_type": "latex",
+        "score": 10,
+        "comment": "分数按/10给出"
+    }
+}

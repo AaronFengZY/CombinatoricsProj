@@ -1,0 +1,62 @@
+{
+    "Ch3-3X-1": {
+        "file_type": "latex",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-2": {
+        "file_type": "latex",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-3": {
+        "file_type": "latex",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-4": {
+        "file_type": "latex",
+        "score": 39,
+        "comment": "3.1 -1 答案少一项x\n3.3 继承了3.1的错误，递推式正确"
+    },
+    "Ch3-3X-5": {
+        "file_type": "latex",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-6": {
+        "file_type": "md",
+        "score": 38,
+        "comment": "3.3 -2 还需要/x"
+    },
+    "Ch3-3X-7": {
+        "file_type": "md",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-8": {
+        "file_type": "latex",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-9": {
+        "file_type": "latex",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-10": {
+        "file_type": "md",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-11": {
+        "file_type": "md",
+        "score": 40,
+        "comment": ""
+    },
+    "Ch3-3X-12": {
+        "file_type": "md",
+        "score": 38,
+        "comment": "3.3 -2 少了/x的部分"
+    }
+}
