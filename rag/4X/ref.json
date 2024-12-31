@@ -1,0 +1,294 @@
+{
+  "4.1": {
+    "problem": "设 $G_n=F_{2n}\\ (n\\ge0)$ ，其中 $F_n$ 是第 $n$ 个 Fibbonacci 数. (1)证明： $G_n-3G_{n-1}+G_{n-2}=0\\ (n=2,\\ 3,\\ 4,...)$ ；(2) 求数列 $\\{G_n\\}$ 的母函数. ",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$G_n-3G_{n-1}+G_{n-2}=F_{2n}-3F_{2n-2}+F_{2n-4}=F_{2n-1}-2F_{2n-2}+F_{2n-4}=-F_{2n-2}+F_{2n-3}+F_{2n-4}=0$",
+          "rules": [
+            {
+              "rule": "$G_n-3G_{n-1}+G_{n-2}=F_{2n}-3F_{2n-2}+F_{2n-4}=F_{2n-1}-2F_{2n-2}+F_{2n-4}=-F_{2n-2}+F_{2n-3}+F_{2n-4}=0$",
+              "score": 5
+            }
+          ]
+        }
+      ],
+      "(2)": [
+        {
+          "answer": "$g(x)=\\frac{x}{1-3x+x^2}$",
+          "rules": [
+            {
+              "rule": "设数列 $\\{G_n\\}$ 的母函数为 $g(x)=G_0+G_1x+G_2x^2+...$, $$[x^n]g(x)-[x^n]3xg(x)+[x^n]x^2g(x)=0$$",
+              "score": 2
+            },
+            {
+              "rule": "经过系数对比$$g(x)-3xg(x)+x^2g(x)=x$$",
+              "score": 2
+            },
+            {
+              "rule": "$g(x)=\\frac{x}{1-3x+x^2}$",
+              "score": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.2": {
+    "problem": "已知数列 $\\{a_n\\}$ 的母函数为 $\\frac{1}{1-x+x^2}$ ，求 $\\{a_n\\}$ 满足的二阶齐次线性常系数递推式，并求 $a_0$ ， $a_1$.",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$a_n=a_{n-1}-a_{n-2}\\quad(n\\ge2)$, $a_0=1 ， a_1=1$",
+          "rules": [
+            {
+              "rule": "特征多项式： $C(x)=x^2-x+1$ ，因此$a_n=a_{n-1}-a_{n-2}\\quad(n\\ge2)$",
+              "score": 6
+            },
+            {
+              "rule": "利用长除法，$$\\frac{1}{1-x+x^2}=1+x-x^3+...$$,因此$a_0=1 ， a_1=1$",
+              "score": 4
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.3": {
+    "problem": "已知 $a_n=c\\cdot3^n+d\\cdot(-1)^n\\ (n\\ge0)$ ，其中 $c$ ， $d$ 是常数，求 $\\{a_n\\}$ 满足的一个不含 $c$ ， $d$ 的线性常系数递推关系. ",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$$\\boxed{a_n=2a_{n-1}+3a_{n-2}\\ (n\\ge2)}$$",
+          "rules": [
+            {
+              "rule": "$\\{a_n\\}$ 的母函数为：$$F(x) = \\sum_{n=0}{a_nx^n} = \\dfrac{c}{1-3x} + \\dfrac{d}{1+x} = \\dfrac{(c+d)+(c-3d)x}{1-2x-3x^2}$$故一个递推关系为 $\\boxed{a_n = 2a_{n-1} + 3a_{n-2}}$．",
+              "score": 10
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.4": {
+    "problem": "求解递推关系：$$\\left\\{\\begin{matrix}\\begin{flalign*}&a_n-2a_{n-1}+a_{n-2}=5\\quad(n\\ge2)&\\\\&a_0=1,\\ a_1=2&\\end{flalign*}\\end{matrix}\\right.$$",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$a_n = \\dfrac{5}{2}n^2 - \\dfrac{3}{2}n + 1$",
+          "rules": [
+            {
+              "rule": "递推关系的特征多项式为 $C(x) = x^2 - 2x + 1$，有 $2$ 重根 $\\alpha = 1$；非齐次部分又向 $\\alpha =1$额外贡献了一次重数．",
+              "score": 5
+            },
+            {
+              "rule": "通项形如 $a_n = b + cn + dn(n-1)$",
+              "score": 3
+            },
+            {
+              "rule": "代入初值求解系数，得到$a_n = \\dfrac{5}{2}n^2 - \\dfrac{3}{2}n + 1$",
+              "score": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.5": {
+    "problem": "由 $A$ ， $B$ ， $C$ ， $D$ 四个字母组成允许重复的 $n$ 位字符串，其中子串 $AB$ 至少出现一次，求满足要求的字符串数目.",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$a_n=4^n+\\frac{\\sqrt{3}}{6}(2-\\sqrt{3})^{n+1}-\\frac{\\sqrt{3}}{6}(2+\\sqrt{3})^{n+1}$",
+          "rules": [
+            {
+              "rule": "设长度为$n$，以$A$结尾且不出现子串$AB$的字符串有$a_n$个，长度为$n$，以其他字母结尾且不出现子串$AB$的字符串有$b_n$个，则$a_n=a_{n-1}+b_{n-1}, b_n=2a_{n-1}+3b_{n-1}$",
+              "score": 3
+            },
+            {
+              "rule": "得到$$a_{n}-4a_{n-1}+a_{n-2}=0$$，初值$a_1=1,a_2=4$",
+              "score": 2
+            },
+            {
+              "rule": "得到特征根$2-\\sqrt{3},\\ 2+\\sqrt{3}$",
+              "score": 2
+            },
+            {
+              "rule": "得到系数$-\\frac{\\sqrt{3}}{6},\\frac{\\sqrt{3}}{6}$",
+              "score": 2
+            },
+            {
+              "rule": "得到$a_n=4^n+\\frac{\\sqrt{3}}{6}(2-\\sqrt{3})^{n+1}-\\frac{\\sqrt{3}}{6}(2+\\sqrt{3})^{n+1}$",
+              "score": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.6": {
+    "problem": "考虑如下汉诺塔问题的变种：有 $A$ ， $B$ ， $C$ 三根柱子，初始时 $A$ 柱上有 $n$ 个圆盘，按直径从小到大的顺序编号为 $1$ 到 $n$ ；最终目标是将所有���数编号的盘套在 $B$ 柱上、所有奇数编号的盘套在 $C$ 柱上. 移动圆盘时的规则不变，求所需的最小移动次数. ",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$a_n=-\\frac{2}{3}-\\frac{1}{21}\\cdot\\cos\\frac{2n\\pi}{3}+\\frac{\\sqrt{3}}{7}\\cdot\\sin\\frac{2n\\pi}{3}+\\frac{5}{7}\\cdot2^{n}$",
+          "rules": [
+            {
+              "rule": "设 $n$ 个盘子所需的最小移动次数为 $a_n$，得到$a_n=2^{n-1}+2^{n-3}+a_{n-3}$",
+              "score": 3
+            },
+            {
+              "rule": "得到$$a_{n}=2a_{n-1}+a_{n-3}-2a_{n-4}$$，初值$a_1=1,a_2=2,a_3=5,a_4=11$",
+              "score": 2
+            },
+            {
+              "rule": "得到特征根$1,2,\\frac{-1-\\sqrt{3}i}{2},\\frac{-1+\\sqrt{3}i}{2}$",
+              "score": 2
+            },
+            {
+              "rule": "将复数根写成三角函数形式$",
+              "score": 1
+            },
+            {
+              "rule": "求解系数得到$a_n=-\\frac{2}{3}-\\frac{1}{21}\\cdot\\cos\\frac{2n\\pi}{3}+\\frac{\\sqrt{3}}{7}\\cdot\\sin\\frac{2n\\pi}{3}+\\frac{5}{7}\\cdot2^{n}$",
+              "score": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.7": {
+    "problem": "使用 $k$ 种字母组成长度为 $n$ 的字符串，但不允许相同字母连续出现 $3$ 次，求方案数.",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$a_n=\\frac{k}{2\\sqrt{k-1}}(\\frac{1}{\\sqrt{k-1}}-\\frac{1}{\\sqrt{k+3}})(\\frac{k-1-\\sqrt{(k-1)(k+3)}}{2})^n+\\frac{k}{2\\sqrt{k-1}}(\\frac{1}{\\sqrt{k-1}}+\\frac{1}{\\sqrt{k+3}})(\\frac{k-1+\\sqrt{(k-1)(k+3)}}{2})^n$",
+          "rules": [
+            {
+              "rule": "设方案数为 $a_n$ ，按最后两个字母是否相同进行分类，得到$$a_n=(k-1)a_{n-2}+(k-1)a_{n-1}$$，初值$$a_1=k,\\ a_2=k^2$$",
+              "score": 5
+            },
+            {
+              "rule": "得到特征根$\\frac{k-1-\\sqrt{(k-1)(k+3)}}{2},\\ x_2=\\frac{k-1+\\sqrt{(k-1)(k+3)}}{2}$",
+              "score": 3
+            },
+            {
+              "rule": "求解系数并得到$a_n=\\frac{k}{2\\sqrt{k-1}}(\\frac{1}{\\sqrt{k-1}}-\\frac{1}{\\sqrt{k+3}})(\\frac{k-1-\\sqrt{(k-1)(k+3)}}{2})^n+\\frac{k}{2\\sqrt{k-1}}(\\frac{1}{\\sqrt{k-1}}+\\frac{1}{\\sqrt{k+3}})(\\frac{k-1+\\sqrt{(k-1)(k+3)}}{2})^n$",
+              "score": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.8": {
+    "problem": "计算： $\\sum\\limits_{k=1}\\limits^nk^4$.",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "S_n=\\left(\\begin{matrix}n\\\\1\\end{matrix}\\right)+15\\left(\\begin{matrix}n\\\\2\\end{matrix}\\right)+50\\left(\\begin{matrix}n\\\\3\\end{matrix}\\right)+60\\left(\\begin{matrix}n\\\\4\\end{matrix}\\right)+24\\left(\\begin{matrix}n\\\\5\\end{matrix}\\right)",
+          "rules": [
+            {
+              "rule": "设$S_n=\\sum\\limits_{k=1}\\limits^nk^4$，基于差分法得到特征方程为$C(x)=(x-1)^6$",
+              "score": 5
+            },
+            {
+              "rule": "得到$S_n$ 的通项表达式$S_n=A_0\\left(\\begin{matrix}n\\\\0\\end{matrix}\\right)+A_1\\left(\\begin{matrix}n\\\\1\\end{matrix}\\right)+A_2\\left(\\begin{matrix}n\\\\2\\end{matrix}\\right)+A_3\\left(\\begin{matrix}n\\\\3\\end{matrix}\\right)+A_4\\left(\\begin{matrix}n\\\\4\\end{matrix}\\right)+A_5\\left(\\begin{matrix}n\\\\5\\end{matrix}\\right)$,初值$$S_0=0,\\ S_1=1,\\ S_2=17,\\ S_3=98,\\ S_4=354,\\ S_5=979$$",
+              "score": 3
+            },
+            {
+              "rule": "求解系数并得到$S_n=\\left(\\begin{matrix}n\\\\1\\end{matrix}\\right)+15\\left(\\begin{matrix}n\\\\2\\end{matrix}\\right)+50\\left(\\begin{matrix}n\\\\3\\end{matrix}\\right)+60\\left(\\begin{matrix}n\\\\4\\end{matrix}\\right)+24\\left(\\begin{matrix}n\\\\5\\end{matrix}\\right)$",
+              "score": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.9": {
+    "problem": "从 $1$ 到 $n$ 的正整数中选取 $k$ 个不同且不相邻的数，方案数记为 $f(n,k)$.（1）求 $f(n,k)$ 满足的一个线性常系数递推关系；（2）用数学归纳法求 $f(n,k)$ 的通项表示；（3）若规定 $1$ 与 $n$ 是相邻的数，并在此前提下令从 $1$ 到 $n$ 的正整数中选取 $k$ 个不同且不相邻的数的方案数为 $g(n,k)$ ，利用 $f(n,k)$ 求 $g(n,k)$.",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$f(n,k)=f(n-1,k)+f(n-2,k-1)$",
+          "rules": [
+            {
+              "rule": "按是否选择数字 $n$ 进行分类,有$f(n,k)=f(n-1,k)+f(n-2,k-1)$",
+              "score": 4
+            }
+          ]
+        }
+      ],
+      "(2)": [
+        {
+          "answer": "使用数学归纳法证明",
+          "rules": [
+            {
+              "rule": "$n=0$ 时有 $f(0,k) = [k = 0] = \\dbinom{n - k +1}{k} = \\dbinom{1 - k}{k}$；$n=1$ 时有 $f(1,k) = [k \\leq 1] = \\dbinom{n-k+1}{k} = \\dbinom{2-k}{k}$．",
+              "score": 1
+            },
+            {
+              "rule": "假设 $n < m$（$m \\geq 2$）时均有 $f(n,k) = \\dbinom{n-k+1}{k}$，证明原命题在 $n=m$ 时仍成立",
+              "score": 2
+            }
+          ]
+        }
+      ],
+      "(3)": [
+        {
+          "answer": "$g(n,k)=f(n-3,k-1)+f(n-1,k)$",
+          "rules": [
+            {
+              "rule": "按是否选择数字 $n$ 分类，得到g(n,k)=f(n-3,k-1)+f(n-1,k)",
+              "score": 3
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "4.10": {
+    "problem": "使用尺寸为 $1\\times1$ 的方砖、直角边长为 $1$ 的等腰直角三角形砖，以及斜边长为 $2$ 的等腰直角三角形砖，铺设 $1\\times n$ 的路径，求：（1）所有可能的铺砖方案数；（2）每一种可能的铺砖方案中使用的砖数相加，得到的砖数的总和.",
+    "answers": {
+      "(1)": [
+        {
+          "answer": "$a_n=(\\frac{1}{2}-\\frac{\\sqrt{3}}{6})(2-\\sqrt{3})^n+(\\frac{1}{2}+\\frac{\\sqrt{3}}{6})(2+\\sqrt{3})^n$",
+          "rules": [
+            {
+              "rule": "设方案数为$a_n$，得到$a_n=4a_{n-1}-a_{n-2}$,初值$a_0=1,\\ a_1=3$",
+              "score": 3
+            },
+            {
+              "rule": "得到特征根$x_1=2-\\sqrt{3},\\ x_2=2+\\sqrt{3}$",
+              "score": 1
+            },
+            {
+              "rule": "求解系数得到$a_n=(\\frac{1}{2}-\\frac{\\sqrt{3}}{6})(2-\\sqrt{3})^n+(\\frac{1}{2}+\\frac{\\sqrt{3}}{6})(2+\\sqrt{3})^n$",
+              "score": 1
+            }
+          ]
+        }
+      ],
+      "(2)": [
+        {
+          "answer": "$b_n=(\\frac{2-\\sqrt{3}}{3}n-\\frac{\\sqrt{3}}{18})\\cdot(2-\\sqrt{3})^n+(\\frac{2+\\sqrt{3}}{3}n+\\frac{\\sqrt{3}}{18})\\cdot(2+\\sqrt{3})^n$",
+          "rules": [
+            {
+              "rule": "设总和为$b_n$，得到$b_n-9b_{n-1}+26b_{n-2}-26b_{n-3}+9b_{n-4}-b_{n-5}=0$,初值$b_0=0,\\ b_1=5,\\ b_2=36,\\ b_3=199,\\ b_4=984$",
+              "score": 3
+            },
+            {
+              "rule": "得到特征根$x_1=2-\\sqrt{3},\\ x_2=2+\\sqrt{3}$",
+              "score": 1
+            },
+            {
+              "rule": "求解系数得到$b_n=(\\frac{2-\\sqrt{3}}{3}n-\\frac{\\sqrt{3}}{18})\\cdot(2-\\sqrt{3})^n+(\\frac{2+\\sqrt{3}}{3}n+\\frac{\\sqrt{3}}{18})\\cdot(2+\\sqrt{3})^n$",
+              "score": 1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
