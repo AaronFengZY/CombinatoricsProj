@@ -1,0 +1,234 @@
+{
+    "6.1": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "## (1) 总共有n个元素，其中m个限制元素不能选，然后考虑选出k个元素的方案数：$C_{n-m}^k$ 用容斥原理进行拆解，考虑选择到了j个限制元素的情况，其他k-j个选非限制元素，那么： $$ C_{n-m}^k = \\sum_{j=0}^m (-1)^j C_m^j C_{n-j}^{k-j} $$ 然后令$k=n-k$ $$ C_{n-m}^{n-k} = \\sum_{j=0}^m (-1)^j C_m^j C_{n-j}^{n-k-j}=\\sum_{j=0}^m (-1)^j C_m^j C_{n-j}^{k} $$",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "得出左侧组合意义",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中正确地描述了左侧的组合意义，即从n个元素中选出k个元素，其中m个限制元素不能选，方案数为$C_{n-m}^k$。这与标准答案中的定义一致，因此根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "右侧组合数的组合意义",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中正确地使用了容斥原理来解释组合数的恒等式，并且通过令$k=n-k$，将等式转化为标准答案中的形式。因此，根据评分规则，右侧组合数的组合意义部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "应用容斥原理",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中应用了容斥原理，正确地描述了从n个元素中选出k个元素的方案数，并通过容斥原理拆解了选择j个限制元素的情况。虽然表达方式与标准答案略有不同，但核心思路和逻辑一致，符合评分规则的要求。因此，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "定义全集${U}$表示从$1,2,\\dots,n$中选出$k$个数字的种数，再定义$A_i(i=1,2,\\dots, m)$表示$\\mathbb{U}$中必须包含$i$的种数，显然有: \\begin{equation} |A_1 \\cap A_2 \\cap \\dots \\cap A_m| = \\binom{n-m}{k-m} = \\binom{n-m}{n-k} \\end{equation} \\par 由容斥原理可得： \\begin{equation} |A_1 \\cap A_2 \\cap \\dots \\cap A_m| = |U| - \\sum_i|\\complement_UA_i|+\\sum_{i<j}|\\complement_UA_i \\cap \\complement_UA_j| - \\dots \\end{equation} 我们很容易得知： \\begin{equation} \\sum_{i_1 < i_2 < \\dots < i_j}|\\complement_UA_{i_1} \\cap \\complement_UA_{i_2} \\cap \\dots \\cap \\complement_UA_{i_j}| = \\binom{m}{j}\\binom{n-j}{k} \\end{equation} 从而我们可以得到： \\begin{equation} |A_1 \\cap A_2 \\cap \\dots \\cap A_m| = \\sum_{j=0}^m(-1)^j\\binom{m}{j}\\binom{n-j}{k} \\end{equation} 综合(1)(4)我们的恒等式得证",
+            "trace": null,
+            "final_graded_score": 3,
+            "total_score": 3
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "## (2) 考虑这个方程的整数解数： $$ x_1+\\dots+x_m = n, \\qquad x_i \\ge 1 $$ 考虑插板法，整数解数为$C_{n-1}^{m-1}$ ``` o o o o o o | | | n个o之间插入m-1个| ``` 考虑用这个方程的整数解数去计算上式： $$ x_1+\\dots+x_m = n, \\qquad x_i \\ge 0 $$ 它的解数是$C_{n+m-1}^{m-1}$，但是这里面有很多情况是$x_i=0$的情况 我们要排除存在变量为0的情况，考虑将j个变量强制设为0的方案数，相当于只要考虑m-j个变量的方案数了：$C_m^jC_{n+m-j-1}^{m-j-1}$ 用容斥原理有： $$ C_{n-1}^{m-1}= \\sum_{j=0}^m (-1)^j C_m^jC_{n+m-j-1}^{m-j-1}= \\sum_{j=0}^m (-1)^j C_m^jC_{n+m-j-1}^{n} $$",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "得出左侧组合意义",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案通过构造组合计数场景，解释了恒等式的组合意义。具体地，学生考虑了方程 $x_1 + \\dots + x_m = n$ 的整数解数，并利用插板法和容斥原理得出了与标准答案一致的结论。因此，根据评分规则，学生答案正确得出了左侧的组合意义，获得相应分值。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "右侧组合数的组合意义",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案通过构造组合计数场景，解释了右侧组合数的组合意义。具体地，学生考虑了方程 $x_1 + \\dots + x_m = n$ 的整数解数，并使用插板法得到解数为 $C_{n-1}^{m-1}$。然后，学生进一步考虑了方程 $x_1 + \\dots + x_m = n$ 且 $x_i \\ge 0$ 的解数，并利用容斥原理排除了存在变量为0的情况，最终得到了与标准答案一致的表达式。因此，学生答案符合评分规则中关于右侧组合数的组合意义的描述，得分为1分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "应用容斥原理",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中正确地应用了容斥原理来解释恒等式的组合意义，通过考虑整数解数的方程并排除存在变量为0的情况，最终得出了与标准答案一致的结论。因此，根据评分规则，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "设 $U$ 是从 $\\{1,2,\\cdots,n,\\cdots,n+m-1\\}$ 中选 $m-1$ 个数的方案，$A_i(1\\le i\\le m)$ 是选择数 $i$ 后的方案，则 $|\\bar A_1\\cap\\cdots\\cap \\bar A_m|$ 为从剩下 $n-1$ 个数中选 $m-1$ 个数的方案数，为 $\\dbinom{n-1}{m-1}$，而 $|A_i|=\\dbinom{n+m-2}{m-2},|A_{i_1}\\cap\\cdots\\cap A_{i_j}|=\\dbinom{n+m-j-1}{m-j-1}$，从而有 $|\\bar A_1\\cap\\cdots\\cap \\bar A_m|=|U|-\\sum|A_i|+\\sum|A_i\\cap A_j|+\\cdots+(-1)^j\\sum |A_{i_1}\\cap\\cdots\\cap A_{i_j}|$ 即 $\\dbinom{n-1}{m-1}=\\displaystyle\\sum_{j=0}^m(-1)^j\\dbinom{m}{j}\\dbinom{n+m-j-1}{n}$",
+            "trace": null,
+            "final_graded_score": 3,
+            "total_score": 3
+        },
+        "(3)": {
+            "subproblem_id": "(3)",
+            "answer": "## (3) 对于： $$ C_{n + m - 1}^{n - 1} = \\sum_{j=0}^m (-1)^j C_{n + m}^{n + j} $$ 考虑n+m-1个球，从中选m个的方案数是$C_{n+m-1}^m = C_{n + m - 1}^{n - 1}$ 从另外一种角度考虑，增加一个0号球，那么选m个的方案数是$C_{n+m}^m$，但这可能会选到0号球。于是减去“选0号球，然后所有球里面选m-1个”的方案数$C_{n+m}^{m-1}$，但这可能会再次选到0号球，因此加上选了两次0号球的方案数$C_{n+m}^{m-2}$... 因此总方案数是$\\sum_{j=0}^m (-1)^j C_{n + m}^{m-j}$ 故 $$ C_{n + m - 1}^{n - 1} = C_{n+m-1}^m= \\sum_{j=0}^m (-1)^j C_{n + m}^{m-j}=\\sum_{j=0}^m (-1)^j C_{n + m}^{n + j} $$",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "得出左侧组合意义",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中关于左侧组合意义的描述与标准答案完全一致，均正确地解释了$C_{n + m - 1}^{n - 1}$的组合意义。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "右侧组合数的组合意义",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案完整地解释了右侧组合数的组合意义，与标准答案一致。具体来说，学生答案正确地描述了从n+m-1个球中选m个的方案数，并通过增加一个0号球的方式，使用容斥原理推导出总方案数的表达式。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "应用容斥原理",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案完整地应用了容斥原理，详细解释了从n+m-1个球中选m个的方案数，并通过增加一个0号球，逐步减去选到0号球的情况，最终得出总方案数。这一过程与标准答案完全一致，符合评分规则。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "能说明清楚为什么容斥没有组合数系数",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案与标准答案完全一致，详细解释了容斥原理的应用，并正确推导了组合恒等式。因此，根据评分规则，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "考虑n+m-1个球，从中选m个的方案数是$C_{n+m-1}^m = C_{n + m - 1}^{n - 1}$ 从另外一种角度考虑，增加一个0号球，那么选m个的方案数是$C_{n+m}^m$，但这可能会选到0号球。于是减去“选0号球，然后所有球里面选m-1个”的方案数$C_{n+m}^{m-1}$，但这可能会再次选到0号球，因此加上选了两次0号球的方案数$C_{n+m}^{m-2}$... 因此总方案数是$\\sum_{j=0}^m (-1)^j C_{n + m}^{m-j}$ 故 $$ C_{n + m - 1}^{n - 1} = C_{n+m-1}^m= \\sum_{j=0}^m (-1)^j C_{n + m}^{m-j}=\\sum_{j=0}^m (-1)^j C_{n + m}^{n + j} $$",
+            "trace": null,
+            "final_graded_score": 4,
+            "total_score": 4
+        }
+    },
+    "6.2": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "## (1) 首先不考虑限制的情况：${9! \\over 3!3!3!}$ 设$A_3$表示存在连续3个a的方案集合，$B_3$表示存在连续3个b的方案集合，$C_3$表示存在连续3个c的方案集合 对$|A_3|, |B_3|, |C_3|$： 将aaa看成一个字母，故$|A_3|= {7! \\over 1!3!3!}= 140 $ 对$|A_3\\bigcap B_3|, |A_3\\bigcap C_3|, |C_3\\bigcap B_3|$ ： 将aaa bbb分别看成一个字母，故$|A_3\\bigcap B_3| = {5! \\over 1!1!3!}=20$ 对$|A_3\\bigcap B_3\\bigcap C_3|$ ： 将aaa bbb ccc分别看成一个字母，故$|A_3\\bigcap B_3\\bigcap C_3| = {3! \\over 1!1!1!}=6$ 总方案数为 $$ {9! \\over 3!3!3!} - 3*140+20*3-6= 1680 - 420 + 60 - 6 = 1314 $$",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "定义集合",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中正确地定义了集合$A_3$, $B_3$, $C_3$，与标准答案一致。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "容斥原理",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案完整地应用了容斥原理，正确地计算了不考虑限制的总排列数、存在连续3个相同字母的排列数、以及它们的交集和最终的总方案数。所有步骤和计算结果均与标准答案一致。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案与标准答案完全一致，包括所有步骤和最终的计算结果。因此，根据评分规则，答案正确，得分为1。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "首先不考虑限制的情况：${9! \\over 3!3!3!}$ 设$A_3$表示存在连续3个a的方案集合，$B_3$表示存在连续3个b的方案集合，$C_3$表示存在连续3个c的方案集合 对$|A_3|, |B_3|, |C_3|$： 将aaa看成一个字母，故$|A_3|= {7! \\over 1!3!3!}= 140 $ 对$|A_3\\bigcap B_3|, |A_3\\bigcap C_3|, |C_3\\bigcap B_3|$ ： 将aaa bbb分别看成一个字母，故$|A_3\\bigcap B_3| = {5! \\over 1!1!3!}=20$ 对$|A_3\\bigcap B_3\\bigcap C_3|$ ： 将aaa bbb ccc分别看成一个字母，故$|A_3\\bigcap B_3\\bigcap C_3| = {3! \\over 1!1!1!}=6$ 总方案数为 $$ {9! \\over 3!3!3!} - 3*140+20*3-6= 1680 - 420 + 60 - 6 = 1314 $$",
+            "trace": null,
+            "final_graded_score": 4,
+            "total_score": 4
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "## (2) 首先不考虑限制的情况：${9! \\over 3!3!3!}$ 再设$A_2$表示存在连续2个a的方案集合，$B_2$表示存在连续2个b的方案集合，$C_2$表示存在连续2个c的方案集合 对$|A_2|, |B_2|, |C_2|$： 将aa看成一个字母，且认为aa和a是不同的字母，直接计算的话是${8! \\over 3!3!} $。但是这样会把aa和a相邻的情况算重，还要减去$|A_3|$ 故$|A_2|={8! \\over 3!3!} -|A_3| = {8! \\over 3!3!} -{7! \\over 3!3!}$ 对$|A_2\\bigcap B_2|, |A_2\\bigcap C_2|, |C_2\\bigcap B_2|$ ： 将aa bb分别看成一个字母，且认为aa和a是不同的字母，直接计算的话是${7! \\over 3!} $。但是这样会把aa和a相邻或者bb和b相邻的情况算重，还要运用容斥原理$-|A_3|-|B_3|+|A_3\\bigcap B_3|$ 故$|A_2\\bigcap B_2|={7! \\over 3!} -|A_3|-|B_3|+|A_3\\bigcap B_3| = {7! \\over 3!} -{7! \\over 3!3!}-{7! \\over 3!3!}+ {5! \\over 1!1!3!}$ 对$|A_2\\bigcap B_2\\bigcap C_2|$ ： 将aa bb cc分别看成一个字母，且认为aa和a是不同的字母，故$|A_2\\bigcap B_2\\bigcap C_2|=6!- A_3-B_3-C_3+|A_3\\bigcap B_3|+|A_3\\bigcap C_3|+|C_3\\bigcap B_3|-|A_3\\bigcap B_3\\bigcap C_3| = 6!-{7! \\over 1!3!3!}*3+ {5! \\over 1!1!3!}*3 + 6 = 6!-366$ 总方案数为 $$ {9! \\over 3!3!3!} - 3*({8! \\over 3!3!} -{7! \\over 3!3!})+3*({7! \\over 3!} -{7! \\over 3!3!}-{7! \\over 3!3!}+ {5! \\over 1!1!3!}) + (6!-366) \\\\ =1680-3*(980)+3*(840-280+20)+354 \\\\ =834 $$",
+            "status": "error",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "捆绑aa,bb,cc并容斥",
+                    "score": 2,
+                    "graded_score": 0,
+                    "process": "学生答案尝试使用捆绑aa,bb,cc并容斥的方法来解决问题，但计算过程中存在多处错误。首先，学生没有正确计算$|A_2|$的值，且后续的容斥计算也存在错误。此外，学生最终得出的总方案数与标准答案不符。因此，根据评分规则，该部分未能得分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "考虑到aaa,bbb,ccc的情况并容斥",
+                    "score": 2,
+                    "graded_score": 0,
+                    "process": "学生答案中未明确考虑aaa, bbb, ccc的情况，且未使用容斥原理来处理这些情况。因此，根据评分规则，该部分未得分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "答案正确",
+                    "score": 2,
+                    "graded_score": 0,
+                    "process": "学生答案与标准答案不一致。学生答案使用了容斥原理，但计算过程中存在错误，导致最终结果不正确。标准答案通过详细的容斥原理计算，得出了正确的方案数174，而学生答案得出的方案数为834，明显错误。因此，根据评分规则，答案不正确，不得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "暂时将每个元素均视为不同的，考虑以下九个条件： \\begin{itemize} \\item $A_1$: $a_2,a_3$ 相邻； \\item $A_2$: $a_3,a_1$ 相邻； \\item $A_3$: $a_1,a_2$ 相邻； \\item $B_1$: $b_2,b_3$ 相邻； \\item \\ldots \\end{itemize} 我们把 $A_1,A_2,A_3$ 称为一组，$B_1,B_2,B_3$ 称为一组，$C_1,C_2,C_3$ 称为一组。注意到同一组中的三个条件，如 $A_1,A_2,A_3$ 不可能同时满足，即 $a_1,a_2,a_3$ 不可能两两相邻。我们需要通过容斥原理，求出九个条件均不满足的方案数。 首先考虑满足一个条件的方案数。我们可以将相邻的那两个元素视为一个整体，这个“整体”内部有两种顺序，故方案数为 $9\\times 2\\times (2+3+3)!=18\\times8!$。 接下来考虑满足两个条件的方案数。如果两个条件处于同一组，即形如 $A_1,A_2$，那么对应的三个元素连续出现。以 $A_1,A_2$ 为例，那么三个 a 会连续出现，且顺序为 $a_2,a_3,a_1$ 或 $a_1,a_3,a_2$。故总方案数为 $3\\times\\binom{3}{2}\\times2\\times(1+3+3)!=18\\times 7!$。如果两个条件不处于同一组，方案数为 $\\binom{3}{2}\\times\\binom{3}{1}\\times\\binom{3}{1}\\times 2\\times 2\\times (2+2+3)!=108\\times 7!$。 接下来考虑满足三个条件的方案数。由于同一组中的三个条件（形如 $A_1,A_2,A_3$）不可能同时满足，所以这三个条件一定分布在两组或三组中。如果是两组，根据前文的做法，我们可以计算出总方案数为 \\begin{equation} 3\\times 2\\times\\binom{3}{2}\\times\\binom{3}{1}\\times 2\\times 2\\times(1+2+3)!=216\\times 6!. \\end{equation} 如果是三组，方案数为 \\begin{equation} \\binom{3}{1}\\times\\binom{3}{1}\\times\\binom{3}{1}\\times 2\\times 2\\times 2\\times(2+2+2)!=216\\times 6!. \\end{equation} 接下来考虑满足四个条件的方案数，同理，这四个条件应该形如 $A_i,A_j,B_u,B_v$ 或 $A_i,A_j,B_u,C_v$。如果是前者，方案数为 \\begin{equation} \\binom{3}{2}\\times\\binom{3}{2}\\times\\binom{3}{2}\\times2\\times 2\\times(1+1+3)!=108\\times 5!. \\end{equation} 如果是后者，方案数为 \\begin{equation} 3\\times\\binom{3}{2}\\times\\binom{3}{1}\\times\\binom{3}{1}\\times 2\\times 2\\times 2\\times(1+2+2)!=648\\times 5!. \\end{equation} 接下来考虑满足五个条件的方案数，此时这五个条件一定形如 $A_i,A_j,B_u,B_v,C_w$，方案数为 \\begin{equation} 3\\times\\binom{3}{2}\\times\\binom{3}{2}\\times\\binom{3}{1}\\times 2\\times 2\\times 2\\times(1+1+2)!=648\\times 4!. \\end{equation} 满足六个条件时，方案数为 \\begin{equation} \\binom{3}{2}\\times \\binom{3}{2}\\times \\binom{3}{2}\\times 2\\times 2\\times 2\\times(1+1+1)!=216\\times 3!. \\end{equation} 由容斥原理，可得没有条件被满足时，总方案数为 \\begin{align} &\\quad 9!-18\\times 8!+18\\times 7!+108\\times 7!-216\\times 6!-216\\times 6! \\\\ &\\quad+108\\times 5!+648\\times 5!-648\\times 4!+216\\times 3! \\\\ &=37584. \\end{align} 现在去除相同字母内部的顺序，可得总方案数为 \\begin{equation} \\frac{37584}{3!3!3!}=174. \\end{equation}",
+            "trace": "二次复查后仍为 0 分",
+            "final_graded_score": 0,
+            "total_score": 6
+        }
+    },
+    "6.3": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "$$ x_1 + x_2 + x_3 = 40, 6 \\leq x_1 \\leq 15, \\; 5 \\leq x_2 \\leq 20, \\; 10 \\leq x_3 \\leq 25 $$ 令 $$ y_1 = x_1 - 6 \\\\ y_2 = x_2 - 5 \\\\ y_3 = x_3 - 10 $$ 约束条件: $$ y_1 + y_2 + y_3 = 19 \\quad (0 \\leq y_1 \\leq 9, \\, 0 \\leq y_2 \\leq 15, \\, 0 \\leq y_3 \\leq 15) $$ 不考虑限制的方案数:$C^{2}_{19 + 3 - 1}$ 假设约束1不满足，即$y_1\\ge 10$: $$ y_1' = y_1 - 10, \\quad y_1' + y_2 + y_3 = 9 \\quad (0 \\leq y_1') $$ 方案数为$C^{2}_{9 + 3 - 1}$ 假设约束2不满足，即$y_2 \\geq 16 $，同理$\\quad C^{2}_{3 + 3 - 1}$： 假设约束3不满足，即$y_3 \\geq 16 $，同理$C^{2}_{3 + 3 - 1}$： 同时不满足以上两条约束的方案数为0。 故总方案数： $$ C^{2}_{21} - C^{2}_{9+3-1} - C^{2}_{3+3-1} - C^{2}_{3+3-1} = 210 - 55 - 10 - 10 = 135 $$",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "换元正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中换元步骤正确，将原变量$x_1, x_2, x_3$分别减去对应的下限值，得到新的变量$y_1, y_2, y_3$，并正确列出了新的约束条件。因此，根据评分规则，换元正确部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "计算总情况数",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案正确地计算了总情况数，得出了与标准答案一致的结果135。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "计算一个超出上界的情况",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中正确计算了一个超出上界的情况，即当$y_1 \\geq 10$时，方案数为$C^{2}_{9+3-1} = 55$。这与标准答案中的计算一致，因此根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "计算两个超出上界的情况",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中正确地计算了两个超出上界的情况，即$y_2 \\geq 16$和$y_3 \\geq 16$，并分别给出了正确的方案数$C^{2}_{3+3-1}=10$。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "计算三个超出上界的情况",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案正确地计算了三个超出上界的情况，即$y_1 \\geq 10$、$y_2 \\geq 16$和$y_3 \\geq 16$，并分别给出了相应的方案数$C^{2}_{9+3-1}$、$C^{2}_{3+3-1}$和$C^{2}_{3+3-1}$。这些计算与标准答案一致，因此根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "容斥原理得到答案",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案正确地应用了容斥原理，通过变量替换和约束条件的处理，最终得到了正确的整数解数目135。与标准答案的步骤和结果完全一致，因此根据评分规则，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "记 $x_1=y_1+5,x_2=y_2+4,x_3=y_3+9$，则 \\begin{equation} 40=x_1+x_2+x_3=y_1+y_2+y_3+5+4+9=y_1+y_2+y_3+18. \\end{equation} 故 $y_1+y_2+y_3=22$，且 $1\\le y_1\\le 10,1\\le y_2\\le 16,1\\le y_3\\le 16$。 不考虑上界时，解共有 \\begin{equation} \\binom{22-1}{3-1}=\\binom{21}{2}=210. \\end{equation} 若 $y_1\\gt 10$，记 $y_1=z_1+10$，则 $z_1\\ge 1$ 且 $z_1+y_2+y_3=12$，此时解的个数共有 \\begin{equation} \\binom{12-1}{3-1}=\\binom{11}{2}=55. \\end{equation} 同理，若 $y_2\\gt 16$，解共有 \\begin{equation} \\binom{22-16-1}{3-1}=\\binom{5}{2}=10. \\end{equation} 同理，若 $y_3\\gt 16$，解共有 10 个。 由于$y_1+y_2+y_3=22\\lt (10+1)+(16+1)$，不可能有至少两个变量超出上界。故原问题的整数解数目为 \\begin{equation} 210-55-10-10=135. \\end{equation}",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    }
+}

@@ -26,6 +26,7 @@ diskcache==5.6.3
 distro==1.9.0
 einops==0.8.0
 exceptiongroup==1.2.2
+faiss-cpu==1.9.0.post1
 fastapi==0.115.6
 ffmpy==0.4.0
 filelock==3.16.1
@@ -52,6 +53,8 @@ joblib==1.4.2
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
 kiwisolver==1.4.7
+langchain==0.3.13
+langchain-community==0.3.13
 lark==1.2.2
 llvmlite==0.43.0
 lm-format-enforcer==0.10.9
@@ -90,6 +93,7 @@ outlines==0.0.46
 packaging==24.2
 pandas==2.2.3
 partial-json-parser==0.2.1.1.post4
+pdfplumber==0.11.4
 pillow==10.4.0
 proglog==0.1.10
 prometheus-fastapi-instrumentator==7.0.0

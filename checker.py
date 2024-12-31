@@ -4,10 +4,9 @@ import json
 from instance.problem import StudentPA
 from instance.ref_problem import RefPA
 from DocToolbox.checker import Checker
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from reporter.default_reporter import DefaultReporter
-from langchain.embeddings import HuggingFaceEmbeddings  # or OpenAIEmbeddings if you used that
-from langchain.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings  # or OpenAIEmbeddings if you used that
 import pdfplumber
 
 def load_faiss_retriever():
@@ -15,7 +14,7 @@ def load_faiss_retriever():
     embeddings = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
     
     # Load the index from local files
-    index_path = "/home/v-zhifeng/HPE/CombinatoricsProj/faiss_index"
+    index_path = "/home/CombinatoricsProj/faiss_index"
     if not os.path.isdir(index_path):
         raise ValueError(f"FAISS index folder not found at {index_path}.")
 
