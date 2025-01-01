@@ -1,175 +1,240 @@
 # AI_Grader2024
 
-## Framework 
+## 简介
 
-本仓库为AI 自动批改项目的基础框架，提供了基本的结构化数据读取、逐题目批改以及批改结果报告生成的功能，可以选择在此框架上进行扩展。
+本项目旨在为编程作业或数学推导题提供自动批改、报告生成以及检索增强 (RAG) 的辅助工具。通过对参考答案与学生答案进行对比分析，实现对解题方法与评分规则的自动评估，并最终生成 Markdown 或 JSON 格式的批改报告。项目还提供了自动化测评脚本，便于对批改结果进行量化评估。
 
-首先修改`check.py`中的第17行：
-```py
-index_path = "/home/CombinatoricsProj/faiss_index"
+---
+
+## 项目结构
+
+本项目包含以下主要目录及文件：
+
+- `data/`: 用于存放输入输出数据，包括章节测试样本、处理脚本以及测试样本配置文件等。常见结构示例：
+  ```
+  data/
+  ├── 0X
+  ├── 1
+  ├── 1B
+  ├── 1A
+  └── ...
+  ```
+  - `hw_base_student_config.json`: 指定测试样本路径及其他配置信息  
+  - `add_to_json.py` / `process.py`: 数据预处理或后处理脚本  
+  - 以数字或字母开头的文件夹中通常存放对应章节或作业号下的原始/参考/生成的作业数据
+
+- `instance/`: 定义了项目中使用的若干示例类型  
+  - `problem.py`: 定义了学生作业类 `StudentPA` 及其内部类型，提供从原始 JSON 读取学生答案的功能  
+  - `ref_problem.py`: 定义了标准答案类 `RefPA` 及其内部类型，提供从 JSON 加载参考答案的功能
+
+- `DocToolbox/`: （原先的 `checker/` 文件夹现已更名为 `DocToolbox/`）包含核心的批改逻辑及文档检索逻辑
+  - `checker.py`: 主要核心逻辑所在，定义 `Checker` 类及其 `check` 方法，内部实现批改流程  
+  - `base.py`: 批改基类 `BaseChecker`  
+  - `PDFRetriever.py`: 用于实现 RAG（Retrieval-Augmented Generation）相关检索逻辑，例如从 PDF 中检索题目信息或答案线索  
+  - `__init__.py`: Python 包初始化文件
+
+- `reporter/`: 用于生成批改结果的报告
+  - `default_reporter.py`: 默认的报告生成器，可生成 Markdown 与 JSON 格式的结果  
+  - `aggregator.py`: 在报告中统计整份作业的概览、汇总信息
+
+- `utils/`: 存放项目中的工具函数或外部 API 封装等
+  - `apis/`: 提供与外部 API（如 OpenAI 或 Dify App 等）串行调用的简单接口  
+  - `wrappers/`: 对各类 API 的调用格式或 Prompt 进行封装
+
+- `eval/`: 用于对最终批改结果进行测评
+  - `eval.py`: 评估逻辑脚本，可根据已有的批改结果计算多种评估指标  
+  - `eval.sh`: 运行测评的 Bash 脚本，可一次性批量评估多个作业/学生的结果，并生成测评报告
+
+- `checker.py`: 可以直接调用的批改脚本（示例实现同 `DocToolbox/checker.py` 相似，但可根据需求单独执行）
+
+- `checker.sh`: Bash 脚本，用于批量对指定作业/学生进行批改，脚本内容示例如下：
+  ```bash
+  #!/bin/bash
+
+  # Define hw_base and its associated student_ids as a mapping
+  declare -A hw_base_students
+
+  hw_base_students["data/1"]="1"
+  hw_base_students["data/0X"]="Ch0-0X-10 Ch0-0X-12"
+  hw_base_students["data/1B"]="Ch1-1B-13 Ch1-1B-2 Ch1-1B-4 Ch1-1B-6 Ch1-1B-7"
+  hw_base_students["data/2A"]="Ch2-2A-1 Ch2-2A-10 Ch2-2A-2 Ch2-2A-4 Ch2-2A-6 Ch2-2A-7 Ch2-2A-9"
+  hw_base_students["data/2X"]="Ch2-2X-14 Ch2-2X-7 Ch2-2X-8 Ch2-2X-9"
+  hw_base_students["data/1X"]="Ch1-1X-10 Ch1-1X-12 Ch1-1X-13 Ch1-1X-14 Ch1-1X-2 Ch1-1X-5 Ch1-1X-7"
+  hw_base_students["data/1A"]="Ch1-1A-1 Ch1-1A-10 Ch1-1A-11 Ch1-1A-13 Ch1-1A-14 Ch1-1A-15 Ch1-1A-16 Ch1-1A-17 Ch1-1A-18 Ch1-1A-20 Ch1-1A-21 Ch1-1A-22 Ch1-1A-24 Ch1-1A-25 Ch1-1A-3 Ch1-1A-4 Ch1-1A-5 Ch1-1A-6 Ch1-1A-8 Ch1-1A-9"
+  hw_base_students["data/2B"]="Ch2-2B-1 Ch2-2B-2"
+  hw_base_students["data/6X"]="Ch6-X-1 Ch6-X-2 Ch6-X-3 Ch6-X-4 Ch6-X-5"
+  hw_base_students["data/4X"]="Ch4-X-10 Ch4-X-6 Ch4-X-7 Ch4-X-9"
+  hw_base_students["data/3X"]="Ch3-3X-10 Ch3-3X-11 Ch3-3X-12 Ch3-3X-6 Ch3-3X-7"
+
+  # Set the number of responses as a default parameter
+  num_responses=1
+
+  # Iterate over the mapping and run the checker for each hw_base and student_id
+  for hw_base in "${!hw_base_students[@]}"; do
+      student_ids=${hw_base_students[$hw_base]}
+      for student_id in $student_ids; do
+          python3 checker.py --hw_base="$hw_base" --num_responses="$num_responses" "$student_id"
+      done
+  done
+  ```
+
+- `requirements.txt`: 用于记录依赖库，可通过 `pip install -r requirements.txt` 安装项目所需的第三方库。
+
+---
+
+## 环境配置
+
+如果安装了 [conda](https://docs.conda.io/en/latest/)，可在项目根目录下执行以下命令来创建并激活 Python 3.9 的环境（此处以环境名 `combinatorics` 为例）：
+
+```bash
+conda create --name combinatorics python=3.9
+conda activate combinatorics
 ```
-将这一文件夹的路径改为正确的本地路径。
 
-### 项目结构
-
-项目根目录下包含以下模块：
-- `data/`: 用于存放输入输出数据，其中包含`1/`作为第一次作业的示例数据，其下为: 
-  - `raw/`: 用于存放学生的原始提交结构化数据，每个文件以学生学号命名（匿名化后），为Json格式，其中具体结构见后流程部分介绍
-  - `refs/`: 用于存放标准答案的结构化数据，每次作业有唯一的标准答案，为Json格式，内容见后
-  - `results/`: 用于存放批改结果，每份作业会同时生成Json和Md格式的批改结果，分别用于后续统计和直观展示
-- `instance/`: 定义了项目中使用的数个示例类型:
-  - `problem.py`: 定义了学生作业类`StudentPA`及其内部类型，逻辑见后
-  - `ref_problem.py`: 定义了标准答案类`RefPA`及其内部类型，逻辑见后
-- `checker/`: 包含了核心的批改逻辑，其中:
-  - `base.py`: 定义批改基类`BaseChecker` 
-  - `example_checker.py`: 一个简单的示例批改器
-- `reporter/`: 包含了批改结果报告生成逻辑，其中:
-  - `default_reporter.py`: 定义默认的报告生成器
-  - `aggregator.py`: 用于在Md报告中生成整份作业的统计信息
-- `utils/`: 包含了项目中使用的一些工具函数
-  - `apis/`: 提供了简单串行调用OpenAI like API和Dify App API的接口
-  - `wrappers/`: 放置每个API调用格式的外部封装，包括请求的System prompt、User query format等
-
-根目录下`README_legacy.md`提供了旧版本的README，包含了项目的历史信息，以及安装和运行示例。
-
-### 基本流程
-
-下面介绍框架的基本流程
-
-#### 数据读取
-
-每次作业的数据包含“作业”，“题目”，“子题目”三个层次，其中子题目可能具有多个层次，但是我们为了简单将其展平为单层，多层的题号使用“@”符连接，例如“1)@a)”表示1)下的a)子题目。
-
-标准答案的输入数据示例如下：
-```json
-{
-    //... some problems
-    "1.2": {
-        "problem": "$6$个男生和$5$个女生围在一圆桌旁，若\n%\n\begin{enumerate}[label={\rm (arabic*)}]\n    item 任何两个女生不相邻；\n    item 所有女生形成一个整体；\n    item 女生$A$两侧均是男生。\nend{enumerate}\n%\n分别讨论有多少种方案。",
-        "answers": {
-            "(1)": [
-                {
-                    "answer": "$6$个男生之间形成$6$个空位，$5$位女生每人占据一个空位。从剩下的那个空位处切开圆排列、顺时针展开，即得到男女间隔的一个线排列，而所求的圆排列显然和展开后的线排列一一对应。因此，方案数即为$6! \\dotp 5! = 86400$",
-                    "rules": [
-                        {
-                            "rule": "女生和男生交错排列",
-                            "score": 1
-                        },
-                        {
-                            "rule": "转化为线排列",
-                            "score": 1
-                        },
-                        {
-                            "rule": "答案正确",
-                            "score": 1
-                        }
-                    ]
-                }
-            ],
-            "(2)": [
-                {
-                    "answer": "将全体女生视作一个$6!$种可能性的整体与$5$个男生作圆排列，方案数即为$6! \\dotp 5! = 86400$；",
-                    "rules": [
-                        {
-                            "rule": "将女生视为一个整体",
-                            "score": 1
-                        },
-                        {
-                            "rule": "女生内部排列",
-                            "score": 1
-                        },
-                        {
-                            "rule": "整体做圆排列",
-                            "score": 1
-                        },
-                        {
-                            "rule": "答案正确",
-                            "score": 1
-                        }
-                    ]
-                }
-            ],
-            // ... some other subproblems
-        }
-    },
-    //... some other problems
-}
+然后安装项目依赖：
+```bash
+pip install -r requirements.txt
 ```
-- 整个Dict对应于一次PA的参考答案，其中key对应每个题目的题号，value为题目的描述和答案:
-- 每个题目的Dict中:
-  - `problem`: 为整个题目的描述，包含题目的描述和子题目的描述。这里由于并不容易处理小题之间的相互依赖以及题干共用的问题，所以我们仅将每个子题目的解答拆分开来，而题目的描述保持完整。
-  - `answers`: 为每个子题目的参考答案，Dict中的key为子题目的题号，value为这个子题目的可能解题方案的列表
-- 每个子题目的List中，每个Dict对应于这个子题目一种可能的求解流程，比如可以用代入规则、命题演算、真值表等方法求解同一个表达式的真值，它们属于并列的解题方法。每个Dict中:
-  - `answer`: 这一种解题方法的标准答案，文本格式
-  - `rules`: 这一种解题方法的评分标准，List中每个Dict对应于一条评分规则，其中包含评分规则的描述`rule`和分值`score`，作为AI的输入
 
-`ref_problem.py`中`RefPA`课通过`from_json`方法直接读取一个标准答案的Json文件，生成一个`RefPA`对象。每个题目对应于一个`RefProblem`对象，其中包含了题目的描述和子题目的参考答案。每个子题目对应于一个`BaseProblem`对象，其中包含了子题目的题号和解题方法列表。每个解题方法对应于一个`Solution`对象，其中包含了答案和评分规则。
+完成以上步骤后，即可开始使用本项目提供的脚本和工具。
 
-学生答案的输入数据示例如下：
-```json
-{
-    // ... some problems
-    "1.2": {
-        "(1)": "$6$个男生之间形成$6$个空位，$5$位女生每人占据一个空位。从剩下的那个空位处切开圆排列、顺时针展开，即得到男女间隔的一个线排列，而所求的圆排列显然和展开后的线排列一一对应。因此，方案数即为$6! \\dotp 5! = 86400$",
-        "(2)": "将全体女生视作一个$6!$种可能性的整体与$5$个男生作圆排列，方案数即为$6! \\dotp 5! = 86400$；",
-        "(3)": "从$8$个男生中依次挑选两人放置在$A$的左右两侧（$P(6, 2)$种方案），然后将其视作一个整体与其余$8$个学生作圆排列，方案数即为$P(6, 2) \\dotp 8! = 1\\,209\\,600$"
-    },
-    // ... some other problems
-}
-```
-- 顶层为Dict，key为题目的题号，value为学生的答案
-- 每个题目的Dict中，key为子题目的题号，value为学生的答案文本
+---
 
-`problem.py`中`StudentPA`通过`load_raw`方法直接读取一个学生答案的Json文件，生成一个`StudentPA`对象。每个题目对应于一个`StudentProblem`对象，其中包含了题目的描述和子题目的学生答案。每个子题目对应于一个`StudentProblem`对象，其中包含了子题目的题号和学生答案。
+## 基本批改流程
 
-经过批改之后，将会将批改相关信息写入对应的`StudentPA`对象中，包括得分、匹配到的解题方法、是否出现异常等信息，通过`to_dict`导出为Json格式的批改结果。`load_graded`方法可以加载一个批改结果的Json文件，生成一个包含批改结果的`StudentPA`对象。
+### 1. 数据读取
 
-#### 批改逻辑
+项目将作业数据分为“作业”、“题目”、“子题目”三个层次；子题目若有多层，本框架会以“@”连接多层子题号。如：  
+- **标准答案**（`ref_problem.py` 的 `RefPA` 可使用 `from_json` 方法读取）  
+- **学生答案**（`problem.py` 的 `StudentPA` 可使用 `load_raw` 方法读取）
 
-基础框架通过逐一检查参考答案中给定的评分规则进行批改，见`example_checker.py`中的`check`方法:
+### 2. 批改逻辑
 
+主要位于 `DocToolbox/checker.py` 中 `Checker` 类的 `check` 方法，可根据子题目的不同解法规则进行评分。示例逻辑：
 ```python
 def check(self, ref_pa, student_pa):
-        from tqdm import tqdm
-
-        for problem_id, ref_problem in tqdm(ref_pa.problems.items(), desc="Checking problems", total=len(ref_pa.problems)):
-            student_problem = student_pa.problems[problem_id]
+    # 遍历题目
+    for problem_id, ref_problem in ref_pa.problems.items():
+        student_problem = student_pa.problems[problem_id]
+        
+        # 遍历子题目
+        for subproblem_id, ref_subproblem in ref_problem.answers.items():
+            student_solution = student_problem.answers[subproblem_id]
             
-            for subproblem_id, ref_subproblem in tqdm(ref_problem.answers.items(), desc="Checking subproblems", total=len(ref_problem.answers)):
-                student_solution = student_problem.answers[subproblem_id]
-                
-                # TODO: add solution matching logic here
-                solution_id = 0
-                ref_solution = ref_subproblem.solutions[solution_id]
-                student_solution.set_solution(ref_solution.answer, solution_id)
+            # (可扩展) 选取最佳解法、逐条评分
+            ref_solution = ref_subproblem.solutions[0]
+            student_solution.set_solution(ref_solution.answer, 0)
 
-                # check rule by rule
-                for id, rule in tqdm(enumerate(ref_solution.rules), desc="Checking rules", total=len(ref_solution.rules)):
-                    inputs = format_openai_inputs(
-                        ref_problem.problem,
-                        ref_solution,
-                        student_solution,
-                        id,
-                    )
-                    response = openai_completion(**inputs)
+            for rule_id, rule in enumerate(ref_solution.rules):
+                # 简单示例：若学生答案包含某关键词则给分
+                if rule.rule in student_solution.text:
+                    score = rule.score
+                else:
+                    score = 0
+                student_solution.add_score(rule, "批改说明", score)
 
-                    process, score = self.parse_grading_response(response)
-                    
-                    tqdm.write(f"Process: {process}")
-                    tqdm.write(f"Score: {score}")
-                    if not rule.check_valid_score(score):
-                        student_solution.set_error(f"Invalid score {score} for rule {rule.rule} (max {rule.score})")
+            # 统计并计算最终得分
+            student_solution.finalize(ref_solution.rules)
 
-                    student_solution.add_score(rule, process, score)
-                
-                student_solution.finalize(ref_solution.rules)
-
-        return student_pa
+    return student_pa
 ```
-- 基础框架并没有实现匹配解题方法的逻辑，暂时直接使用首个解题方法进行批改。后续可加入根据参考答案文本和学生答案首先匹配解题方法，再进行批改，并在无匹配时标记新解题方法异常。
 
-#### 报告生成
+### 3. 报告生成
 
-`default_reporter.py`中的`generate_reports`方法用于生成批改结果的报告，其中包含了每个题目的批改结果和整份作业的统计信息。以包含批改结果的`StudentPA`对象为输入，会在指定的Json和Md文件路径下生成对应的报告。
+批改完成后，可调用 `reporter/default_reporter.py` 的 `generate_reports` 方法生成 Markdown 和 JSON 格式结果文件：
+- JSON 文件包含每个子题的评分、匹配的解题方法与规则等信息  
+- Markdown 文件包含分数、整体统计，以及异常情况等说明，便于快速查看
 
-对于出现异常的题目，在报告中会被标记为`N/A`，并不会参与统计分数的计算。后续可以加入对应异常信息的统计。
+---
+
+## 批改结果测评
+
+项目中提供了 `eval/` 文件夹下的测评脚本，用于对已完成批改的结果进行量化评估：
+
+- `eval.py`: 评估脚本，核心测评指标包括：
+
+  1. **ACC** (Accuracy-like metric)  
+     \[
+     \mathrm{ACC} = 1 - \sum_{l=1}^{\text{subproblem}} \sum_{j=1}^{\text{rule}} \frac{|s_{\mathrm{gt}} - s_{\mathrm{llm}}|}{s_{\mathrm{total}}}
+     \]
+     其中 \( s_{\mathrm{gt}} \) 表示该子题的真值分数，\( s_{\mathrm{llm}} \) 表示模型打分结果，\( s_{\mathrm{total}} \) 为可用的总分，根据所有子题、规则进行归一化处理。
+
+  2. **Average Absolute Error (AAE)**:  
+     \[
+     \text{AAE} = \frac{\sum |s_{\mathrm{gt}} - s_{\mathrm{llm}}|}{\text{总题数}}
+     \]
+     即所有学生在所有子题的绝对误差平均值。
+
+- `eval.sh`: Bash 脚本，一次性批量评估多个作业/学生，最终评估结果会输出在控制台，并同时以 JSON 和 Markdown 格式分别保存在 `result/` 文件夹中。  
+  示例运行命令：
+  ```bash
+  bash ./eval/eval.sh
+  ```
+
+### 测评示例
+
+假设我们对 `data/0X` 下的作业进行测评，运行：
+```bash
+bash ./eval/eval.sh
+```
+输出示例可能如下：
+```
+=== Now evaluating assignment 'data/0X' with students: Ch0-0X-10 Ch0-0X-12
+
+Evaluating assignment in: /home/v-zhifeng/HPE/CombinatoricsProj/data/0X
+Students: ['Ch0-0X-10', 'Ch0-0X-12']
+
+--- Student: Ch0-0X-10 ---
+  Ground Truth Score       : 9.5
+  Final Graded Score       : 6.00
+  Absolute Error           : 3.5000
+  ACC                      : 0.6316
+
+--- Student: Ch0-0X-12 ---
+  Ground Truth Score       : 9.5
+  Final Graded Score       : 7.50
+  Absolute Error           : 2.0000
+  ACC                      : 0.7895
+
+=== Overall Assignment Stats ===
+Mean ACC across 2 students       : 0.7105
+Mean Abs Error across 2 students : 2.7500
+```
+该结果同时以 JSON 和 Markdown 文件的形式保存在 `result/0X/` 文件夹中，便于后续检阅和分析。
+
+---
+
+## 使用示例
+
+1. **批改（单次运行 Python 脚本）：**
+   ```bash
+   python3 checker.py --hw_base="data/1" --num_responses=1 "1"
+   ```
+   此命令会根据 `data/1` 目录和作业编号 `1` 来进行批改，生成对应的 Markdown 和 JSON 报告。
+
+2. **批改（批量运行 Bash 脚本）：**
+   ```bash
+   bash checker.sh
+   ```
+   此命令会批量遍历脚本中配置的 `hw_base` 与 `student_ids`，分别执行批改流程，并在对应目录下生成报告。
+
+3. **测评（批量评估）：**
+   ```bash
+   bash ./eval/eval.sh
+   ```
+   此命令会批量遍历配置好的作业路径与学生 ID，计算 ACC、AAE 等测评指标，并将结果保存到 `result/` 文件夹中。
+
+---
+
+## 其他说明
+
+- **异常处理**  
+  若在批改过程中无法匹配参考解法或发现异常情况，可在最终结果中标记为 `N/A`，并在报告中体现。
+
+- **RAG（Retrieval-Augmented Generation）**  
+  `DocToolbox/PDFRetriever.py` 可扩展实现基于检索的增强生成逻辑，从 PDF 或其他文档中获取题干或答案线索，与大模型配合进行答案比对。
+
+- **后续扩展**  
+  可扩展更智能的解题匹配、细化评分标准或复杂的上下文管理逻辑，提升批改准确度和多场景适用性。
+
+如有任何疑问或改进建议，欢迎在 Issue 中讨论或提交 PR。祝学习/使用愉快！

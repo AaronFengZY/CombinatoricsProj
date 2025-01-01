@@ -1,15 +1,15 @@
 {
   "assignment": "0X",
   "num_students": 2,
-  "mean_ACC": 0.7631578947368421,
-  "mean_abs_error": 2.25,
+  "mean_ACC": 0.7105263157894737,
+  "mean_abs_error": 2.75,
   "students": [
     {
       "student_id": "Ch0-0X-10",
       "gt_problem_score": 9.5,
-      "total_final_graded_score": 7.0,
-      "absolute_error": 2.5,
-      "ACC": 0.736842105263158
+      "total_final_graded_score": 6.0,
+      "absolute_error": 3.5,
+      "ACC": 0.631578947368421
     },
     {
       "student_id": "Ch0-0X-12",
