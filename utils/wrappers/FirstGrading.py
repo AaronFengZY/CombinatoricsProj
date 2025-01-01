@@ -29,7 +29,6 @@ ONE_SHOT_PATTERN = """
   "process": "学生答案中关于3个顶点在圆上的情况的描述与标准答案一致，均指出方案数为$\\binom{n}{3}$。因此，根据评分规则，该部分得分。",
   "score": 1
 }
-
 """
 
 CHECK_PATTERN="""
