@@ -1,0 +1,148 @@
+{
+  "assignment": "1A",
+  "num_students": 20,
+  "mean_ACC": 0.855033806989044,
+  "mean_abs_error": 16.25,
+  "students": [
+    {
+      "student_id": "Ch1-1A-1",
+      "gt_problem_score": 114.0,
+      "total_final_graded_score": 96.0,
+      "absolute_error": 18.0,
+      "ACC": 0.8421052631578947
+    },
+    {
+      "student_id": "Ch1-1A-10",
+      "gt_problem_score": 100.0,
+      "total_final_graded_score": 99.0,
+      "absolute_error": 1.0,
+      "ACC": 0.99
+    },
+    {
+      "student_id": "Ch1-1A-11",
+      "gt_problem_score": 110.0,
+      "total_final_graded_score": 87.0,
+      "absolute_error": 23.0,
+      "ACC": 0.7909090909090909
+    },
+    {
+      "student_id": "Ch1-1A-13",
+      "gt_problem_score": 117.0,
+      "total_final_graded_score": 94.0,
+      "absolute_error": 23.0,
+      "ACC": 0.8034188034188035
+    },
+    {
+      "student_id": "Ch1-1A-14",
+      "gt_problem_score": 116.0,
+      "total_final_graded_score": 90.0,
+      "absolute_error": 26.0,
+      "ACC": 0.7758620689655172
+    },
+    {
+      "student_id": "Ch1-1A-15",
+      "gt_problem_score": 105.0,
+      "total_final_graded_score": 86.0,
+      "absolute_error": 19.0,
+      "ACC": 0.819047619047619
+    },
+    {
+      "student_id": "Ch1-1A-16",
+      "gt_problem_score": 112.0,
+      "total_final_graded_score": 80.0,
+      "absolute_error": 32.0,
+      "ACC": 0.7142857142857143
+    },
+    {
+      "student_id": "Ch1-1A-17",
+      "gt_problem_score": 87.0,
+      "total_final_graded_score": 70.0,
+      "absolute_error": 17.0,
+      "ACC": 0.8045977011494253
+    },
+    {
+      "student_id": "Ch1-1A-18",
+      "gt_problem_score": 118.0,
+      "total_final_graded_score": 100.0,
+      "absolute_error": 18.0,
+      "ACC": 0.847457627118644
+    },
+    {
+      "student_id": "Ch1-1A-20",
+      "gt_problem_score": 119.0,
+      "total_final_graded_score": 110.0,
+      "absolute_error": 9.0,
+      "ACC": 0.9243697478991597
+    },
+    {
+      "student_id": "Ch1-1A-21",
+      "gt_problem_score": 119.0,
+      "total_final_graded_score": 111.0,
+      "absolute_error": 8.0,
+      "ACC": 0.9327731092436975
+    },
+    {
+      "student_id": "Ch1-1A-22",
+      "gt_problem_score": 118.0,
+      "total_final_graded_score": 106.0,
+      "absolute_error": 12.0,
+      "ACC": 0.8983050847457628
+    },
+    {
+      "student_id": "Ch1-1A-24",
+      "gt_problem_score": 110.0,
+      "total_final_graded_score": 94.0,
+      "absolute_error": 16.0,
+      "ACC": 0.8545454545454545
+    },
+    {
+      "student_id": "Ch1-1A-25",
+      "gt_problem_score": 117.0,
+      "total_final_graded_score": 102.0,
+      "absolute_error": 15.0,
+      "ACC": 0.8717948717948718
+    },
+    {
+      "student_id": "Ch1-1A-3",
+      "gt_problem_score": 119.0,
+      "total_final_graded_score": 112.0,
+      "absolute_error": 7.0,
+      "ACC": 0.9411764705882353
+    },
+    {
+      "student_id": "Ch1-1A-4",
+      "gt_problem_score": 111.0,
+      "total_final_graded_score": 97.0,
+      "absolute_error": 14.0,
+      "ACC": 0.8738738738738738
+    },
+    {
+      "student_id": "Ch1-1A-5",
+      "gt_problem_score": 121.0,
+      "total_final_graded_score": 101.0,
+      "absolute_error": 20.0,
+      "ACC": 0.8347107438016529
+    },
+    {
+      "student_id": "Ch1-1A-6",
+      "gt_problem_score": 109.0,
+      "total_final_graded_score": 98.0,
+      "absolute_error": 11.0,
+      "ACC": 0.8990825688073394
+    },
+    {
+      "student_id": "Ch1-1A-8",
+      "gt_problem_score": 118.0,
+      "total_final_graded_score": 98.0,
+      "absolute_error": 20.0,
+      "ACC": 0.8305084745762712
+    },
+    {
+      "student_id": "Ch1-1A-9",
+      "gt_problem_score": 108.0,
+      "total_final_graded_score": 92.0,
+      "absolute_error": 16.0,
+      "ACC": 0.8518518518518519
+    }
+  ]
+}
