@@ -1,0 +1,43 @@
+{
+  "assignment": "6X",
+  "num_students": 5,
+  "mean_ACC": 0.8782820512820513,
+  "mean_abs_error": 3.0,
+  "students": [
+    {
+      "student_id": "Ch6-X-1",
+      "gt_problem_score": 25.0,
+      "total_final_graded_score": 24.0,
+      "absolute_error": 1.0,
+      "ACC": 0.96
+    },
+    {
+      "student_id": "Ch6-X-2",
+      "gt_problem_score": 24.0,
+      "total_final_graded_score": 20.0,
+      "absolute_error": 4.0,
+      "ACC": 0.8333333333333334
+    },
+    {
+      "student_id": "Ch6-X-3",
+      "gt_problem_score": 26.0,
+      "total_final_graded_score": 24.0,
+      "absolute_error": 2.0,
+      "ACC": 0.9230769230769231
+    },
+    {
+      "student_id": "Ch6-X-4",
+      "gt_problem_score": 24.0,
+      "total_final_graded_score": 17.0,
+      "absolute_error": 7.0,
+      "ACC": 0.7083333333333333
+    },
+    {
+      "student_id": "Ch6-X-5",
+      "gt_problem_score": 30.0,
+      "total_final_graded_score": 29.0,
+      "absolute_error": 1.0,
+      "ACC": 0.9666666666666667
+    }
+  ]
+}

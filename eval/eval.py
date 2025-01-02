@@ -92,7 +92,7 @@ def main():
     student_results = []
 
     for stu_id in student_list:
-        student_json_path = os.path.join(base_dir, "results", f"{stu_id}.json")
+        student_json_path = os.path.join(base_dir, "results_final_respose8", f"{stu_id}.json")
         result = evaluate_student(gt_dict, student_json_path)
         count_students += 1
 
@@ -134,7 +134,7 @@ def main():
     #         └─ data/
     script_dir = os.path.dirname(os.path.abspath(__file__))     # /.../CombinatoricsProj/eval
     project_root = os.path.dirname(script_dir)                  # /.../CombinatoricsProj
-    result_dir = os.path.join(project_root, "result")
+    result_dir = os.path.join(project_root, "result_final_respose8")
     os.makedirs(result_dir, exist_ok=True)  # make sure the folder exists
 
     # Create a directory named after the assignment_name

@@ -1,0 +1,114 @@
+{
+    "3.1": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "### 3.1\n* 母函数 \\( G(x) \\) 定义为：\n\n\\[\nG(x) = \\sum_{n=0}^\\infty a_n x^n = \\sum_{n=0}^\\infty n^3 x^n\n\\]\n* 已知：\n\n\\[\n   \\sum_{n=0}^\\infty x^n = \\frac{1}{1 - x}\n\\]\n* 两边求导：\n\\[\n   \\sum_{n=0}^\\infty n x^{n-1} = \\frac{1}{(1 - x)^2} \\implies \\sum_{n=0}^\\infty n x^n = \\frac{x}{(1 - x)^2}\n\\]\n\n* 两边求导：\n\n   \\[\n   \\frac{d}{dx} \\left( \\frac{x}{(1 - x)^2} \\right ) = \\frac{(1 - x)^2 + 2x(1 - x)}{(1 - x)^4} = \\frac{1 + x}{(1 - x)^3}\n   \\]\n\n   \\[\n   \\sum_{n=0}^\\infty n^2 x^n = \\frac{x(1 + x)}{(1 - x)^3}\n   \\]\n\n* 两边求导：\n\n\\[\n   \\frac{d}{dx} \\left( \\frac{x(1 + x)}{(1 - x)^3} \\right ) = \\frac{(1 + 2x)(1 - x)^3 + 3x(1 + x)(1 - x)^2}{(1 - x)^6}\n\\]\n   \n\\[\n   \\sum_{n=0}^\\infty n^3 x^n = \\frac{x(x^2 + 4x + 1)}{(1 - x)^4}\n\\]\n\n* 所以，数列 \\(\\{ a_n \\}\\) 的母函数为：\n\n\\[\nG(x) = \\sum_{n=0}^\\infty n^3 x^n = \\frac{x(x^2 + 4x + 1)}{(1 - x)^4}\n\\]",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "使用求导得到合理的计算式",
+                    "score": 7,
+                    "graded_score": 7,
+                    "process": "学生答案通过多次求导的方法，逐步推导出数列的母函数，最终得到了与标准答案一致的结果。具体步骤如下：1. 从已知的几何级数出发，正确求导得到 $\\sum_{n=0}^\\infty n x^n = \\frac{x}{(1 - x)^2}$；2. 再次求导得到 $\\sum_{n=0}^\\infty n^2 x^n = \\frac{x(1 + x)}{(1 - x)^3}$；3. 最后求导得到 $\\sum_{n=0}^\\infty n^3 x^n = \\frac{x(x^2 + 4x + 1)}{(1 - x)^4}$，这与标准答案完全一致。因此，学生答案符合评分规则，得分为满分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "\\frac{x^3 + 4x^2 + x}{(1 - x)^4}$",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中正确地推导出了数列 $\\{a_n\\}$ 的母函数为 $\\frac{x(x^2 + 4x + 1)}{(1 - x)^4}$，这与标准答案 $\\frac{x^3 + 4x^2 + x}{(1 - x)^4}$ 完全一致。因此，根据评分规则，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "$\\sum_{n = 0}^\\infty n^3 x^n = \\frac{x^3 + 4x^2 + x}{(1 - x)^4}$。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "3.2": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "### 3.2\n\n\\[\na_n = \\binom{n+3}{3} = \\frac{(n+3)(n+2)(n+1)}{6}\n\\]\n\n* 已知：\n\n\\[\n\\sum_{n=0}^{\\infty} x^n = \\frac{1}{1 - x}\n\\]\n\n* 两边求导：\n\\[\n\\sum_{n=1}^{\\infty} n x^{n-1} = \\frac{1}{(1 - x)^2}\n\\]\n\n* 两边求导：\n\n\\[\n\\sum_{n=2}^{\\infty} n(n-1) x^{n-2} = \\frac{2}{(1 - x)^3}\n\\]\n\n* 两边求导\n\n\\[\n\\sum_{n=3}^{\\infty} n(n-1)(n-2) x^{n-3} = \\frac{6}{(1 - x)^4}\n\\]\n\n\n* 统一下标：\n\n\\[\n\\sum_{n=0}^{\\infty} (n+3)(n+2)(n+1) x^n = \\frac{6}{(1 - x)^4}\n\\]\n\n\\[\nG(x) = \\sum_{n=0}^{\\infty} a_n x^n = \\frac{1}{(1 - x)^4}\n\\]\n\\[\nG(x) = \\frac{1}{(1 - x)^4}\n\\]",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "使用求导或展开得到合理的计算式",
+                    "score": 7,
+                    "graded_score": 7,
+                    "process": "学生答案通过多次求导的方法，正确地推导出了母函数的封闭形式。具体步骤包括：首先从已知的几何级数求和公式出发，通过三次求导得到了与标准答案一致的表达式。最终，学生正确地得出了母函数为$\\frac{1}{(1 - x)^4}$的结论。因此，根据评分规则，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "$\\frac{1}{(1 - x)^4}$",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案正确地推导出了母函数的封闭形式为 $\\frac{1}{(1 - x)^4}$，与标准答案完全一致。因此，根据评分规则，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "$\\sum_{n = 0}^\\infty \\binom{n + 3}{3} x^n = \\frac{1}{(1 - x)^4}$。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "3.3": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "### 3.3\n* 将3.1的母函数和\\(\\frac{1}{1-x}\\)相乘即可。\n\\[\nG(x) = \\frac{x(x^2 + 4x + 1)}{(1 - x)^5}\n\\]",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "使用合理的方法得到递推式",
+                    "score": 7,
+                    "graded_score": 3,
+                    "process": "(二次复查) 学生答案中提到了将3.1的母函数和1/(1-x)相乘，这是得到数列{a_n}母函数的一个合理步骤。然而，学生答案中的最终表达式G(x) = x(x^2 + 4x + 1)/(1 - x)^5与标准答案A(x) = (1 + 4x + x^2)/(1 - x)^5在形式上有所不同，且学生未明确说明如何从3.1的母函数推导出最终结果。因此，虽然学生使用了合理的方法，但推导过程不完整且结果有误，无法获得满分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "$ \\frac{1 + 4x + x^2}{(1 - x)^5}$",
+                    "score": 3,
+                    "graded_score": 0,
+                    "process": "学生答案中的母函数形式为$G(x) = \\frac{x(x^2 + 4x + 1)}{(1 - x)^5}$，而标准答案为$A(x) = \\frac{1 + 4x + x^2}{(1 - x)^5}$。学生答案与标准答案在分子部分存在差异，学生答案中多了一个$x$因子，导致形式不一致。因此，根据评分规则，该部分不得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "$A(x) = \\frac{1 + 4x + x^2}{(1 - x)^5}$。",
+            "trace": null,
+            "final_graded_score": 3,
+            "total_score": 10
+        }
+    },
+    "3.4": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "### 3.4\n\\[\nB(x) = \\sum_{n=0}^{\\infty} b_n x^n = b_0 + \\sum_{n=1}^{\\infty} (a_n - a_{n-1}) x^n\n\\]\n\\[\nB(x) = a_0 + (A(x) - a_0) - x A(x) = A(x) - x A(x) = A(x)(1 - x)\n\\]\n\\[\nB(x) = \\frac{4-3x}{1+x-x^3}\n\\]",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "使用合理的方法得到递推式",
+                    "score": 7,
+                    "graded_score": 7,
+                    "process": "学生答案中正确地使用了递推关系，通过 $B(x) = A(x)(1 - x)$ 的方法得到了正确的母函数 $B(x) = \\frac{4-3x}{1+x-x^3}$。这一过程与标准答案一致，符合评分规则的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "$\\frac{4 - 3x}{1 + x - x^3}$",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案正确地推导出了数列 $\\{b_n\\}$ 的母函数 $B(x)$，其最终结果与标准答案 $\\frac{4 - 3x}{1 + x - x^3}$ 完全一致。因此，根据评分规则，该部分得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "$B(x) = \\frac{4 - 3x}{1 + x - x^3}$。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    }
+}

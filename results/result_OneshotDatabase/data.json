@@ -1,0 +1,45 @@
+[
+    {
+      "assignment": "0X",
+      "num_students": 2,
+      "ACC": 0.868421052631579,
+      "AAE": 1.25
+    },
+    {
+      "assignment": "1A",
+      "num_students": 15,
+      "ACC": 0.9179241144348925,
+      "AAE": 9.266666666666667
+    },
+    {
+      "assignment": "2B",
+      "num_students": 2,
+      "ACC": 0.6840480274442539,
+      "AAE": 17.0
+    },
+    {
+      "assignment": "2X",
+      "num_students": 4,
+      "ACC": 0.9082608695652173,
+      "AAE": 4.5
+    },
+    {
+      "assignment": "3X",
+      "num_students": 5,
+      "ACC": 0.95,
+      "AAE": 2.0
+    },
+    {
+      "assignment": "4X",
+      "num_students": 2,
+      "ACC": 0.785482374768089,
+      "AAE": 20.0
+    },
+    {
+      "assignment": "6X",
+      "num_students": 5,
+      "ACC": 0.9039743589743591,
+      "AAE": 2.4
+    }
+  ]
+  

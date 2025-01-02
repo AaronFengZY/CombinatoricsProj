@@ -3,6 +3,8 @@
 """
 from instance.ref_problem import Solution
 from instance.problem import StudentSolution
+import random
+from .OneShotDatabase import RAG
 
 ONE_SHOT_PATTERN = """
 ### 题目文本
@@ -115,8 +117,19 @@ def format_openai_inputs(
     solution: Solution, # ref solution
     student_solution: StudentSolution,  # student answer
     rule_id: int,   # index of the grading rule
-    context_text: str = "" # newly added context from RAG 
+    context_text: str = "", # newly added context from RAG
+    hw_base_suffix: str = "" # newly added hw_base_suffix
 ):
+    
+    # 1. If user hasn't already passed a custom context_text,
+    #    try to load from the RAG dictionary.
+    if hw_base_suffix:
+        if hw_base_suffix in RAG:
+            ONE_SHOT_PATTERN = RAG[hw_base_suffix]
+        else:
+            ONE_SHOT_PATTERN = random.choice(list(RAG.values()))
+
+
     subproblem_id = solution.subproblem_id
     answer = solution.answer
     student_answer = student_solution.answer

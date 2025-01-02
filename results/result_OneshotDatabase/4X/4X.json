@@ -1,0 +1,22 @@
+{
+  "assignment": "4X",
+  "num_students": 2,
+  "mean_ACC": 0.785482374768089,
+  "mean_abs_error": 20.0,
+  "students": [
+    {
+      "student_id": "Ch4-X-10",
+      "gt_problem_score": 88.0,
+      "total_final_graded_score": 70.0,
+      "absolute_error": 18.0,
+      "ACC": 0.7954545454545454
+    },
+    {
+      "student_id": "Ch4-X-7",
+      "gt_problem_score": 98.0,
+      "total_final_graded_score": 76.0,
+      "absolute_error": 22.0,
+      "ACC": 0.7755102040816326
+    }
+  ]
+}

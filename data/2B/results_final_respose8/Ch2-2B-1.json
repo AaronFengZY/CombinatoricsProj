@@ -1,0 +1,205 @@
+{
+    "2.11": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "设非空有限集𝑆 中的元素均为实数，|𝑆|=𝑛．证明：存在非空的𝐴⊆𝑆和整数𝑚， 使得\n$$\n\\left| m + \\sum_{x \\in A} x \\right| \\leq \\frac{1}{n+1}\n$$\n\n##### 解题过程\n\n由于m任取，故m总可以取$-\\text{round}(\\sum\\limits_{x\\in A}x)$，使得$0 \\leq \\left| m + \\sum\\limits_{x \\in A} x \\right| \\leq1$ 是最小的，因而本题实际只需要考虑数字的小数部分（用$\\{x\\}$表示x的小数部分），设S中元素为$a_1, a_2, \\ldots, a_n$，$S_i=\\left|\\left\\{\\sum\\limits_{k=1}^i a_k\\right\\}\\right|$，若要使题目不成立，则应有$\\frac{1}{n+1} < S_i < \\frac{n}{n+1}$，故$S_n - S_1 < \\frac{n}{n+1} - \\frac{1}{n+1}$。\n\n此时假设对$\\forall i, S_{i+1} - S_i > \\frac{1}{n+1}$，那么有\n$$\nS_n - S_1 = (S_n - S_{n-1}) + (S_{n-1} - S_{n-2}) + \\ldots + (S_2 - S_1) \\geq (n-1) \\times \\frac{1}{n+1} = \\frac{n-1}{n+1}\n$$\n矛盾，因此$\\exists i$，使得$S_{i+1} - S_i \\leq \\frac{1}{n+1}$，此时$0 \\leq \\{a_i\\} \\leq \\frac{1}{n+1}$ 或 $\\frac{n}{n+1} \\leq \\{a_i\\} \\leq1$，则令$A=\\{a_i\\}$，$m=-\\lfloor a_i \\rfloor$ 或 $m=-\\lfloor a_i \\rfloor -1$，可使得$\\left| m + \\sum\\limits_{x \\in A} x \\right| \\leq \\frac{1}{n+1}$，故题目得证。\n\n##### 难度评价：适中",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "将$S$中元素排成一列$s_1, s_2, \\cdots, s_n$，记前缀和序列为$T_n = \\sum_{i = 1}^n s_i$。",
+                    "score": 2,
+                    "graded_score": 0,
+                    "process": "学生答案中未明确将$S$中元素排成一列$s_1, s_2, \\cdots, s_n$，也未明确记前缀和序列为$T_n = \\sum_{i = 1}^n s_i$。因此，该评分点未得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "考虑各$T_i - \\lfloor T_i \\rfloor$，若其在$\\left[ 0, \\frac{1}{n + 1} \\right] \\cup \\left[ \\frac{n}{n + 1}, 1 \\right]$中，则令$A = \\left\\{ s_k \\mid k \\leq i \\right\\}$即可",
+                    "score": 3,
+                    "graded_score": 2,
+                    "process": "(二次复查) 学生答案中提到了考虑数字的小数部分，并设定了$S_i$表示前缀和的小数部分。这与标准答案中考虑$T_i - \\lfloor T_i \\rfloor$的思路是一致的。学生进一步分析了$S_i$的取值范围，并指出若$S_i$不在$\\left[ 0, \\frac{1}{n + 1} \\right] \\cup \\left[ \\frac{n}{n + 1}, 1 \\right]$中，则存在$S_{i+1} - S_i \\leq \\frac{1}{n+1}$，从而得出$A$的构造。虽然学生的表述与标准答案略有不同，但核心思路和逻辑推理是相似的，且最终得出了正确的结论。因此，学生答案在这一评分规则上应获得部分分数。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "否则将$\\left[ \\frac{1}{n + 1}, \\frac{n}{n + 1} \\right]$等分为$n - 1$个长度为$\\frac{1}{n + 1}$的区间，必有$T_i, T_j$位于同一区间中",
+                    "score": 3,
+                    "graded_score": 0,
+                    "process": "学生答案中未提及将区间$\\left[ \\frac{1}{n + 1}, \\frac{n}{n + 1} \\right]$等分为$n - 1$个长度为$\\frac{1}{n + 1}$的区间，并说明必有$T_i, T_j$位于同一区间中。因此，该评分点未得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": " 不妨设$i < j$，则令$A = \\left\\{ s_k \\mid i < k \\leq j \\right\\}$即可",
+                    "score": 2,
+                    "graded_score": 0,
+                    "process": "学生答案中未明确提及将$S$中元素排成一列并考虑前缀和序列，也未具体说明如何通过区间划分找到满足条件的$A$。因此，未能完全符合评分规则中的要求。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "将$S$中元素排成一列$s_1, s_2, \\cdots, s_n$，记前缀和序列为$T_n = \\sum_{i = 1}^n s_i$。\\n    考虑各$T_i - \\lfloor T_i \\rfloor$，若其在$\\left[ 0, \\frac{1}{n + 1} \\right] \\cup \\left[ \\frac{n}{n + 1}, 1 \\right]$中，则令$A = \\left\\{ s_k \\mid k \\leq i \\right\\}$即可。\\n    否则将$\\left[ \\frac{1}{n + 1}, \\frac{n}{n + 1} \\right]$等分为$n - 1$个长度为$\\frac{1}{n + 1}$的区间，必有$T_i, T_j$位于同一区间中；\\n    不妨设$i < j$，则令$A = \\left\\{ s_k \\mid i < k \\leq j \\right\\}$即可。    \\end{equation*}",
+            "trace": null,
+            "final_graded_score": 2,
+            "total_score": 10
+        }
+    },
+    "2.12": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "设有整数列 $\\{a_1, a_2, \\ldots, a_n\\}$，数列长度 $n$ 为奇数。对于任意一个 $\\{1, 2, \\ldots, n\\}$ 的排列 $p = p_1 p_2 \\ldots p_n$，定义函数 $f(p)$ 为：\n\n$$\nf(p) = \\sum_{i=1}^{n} a_i p_i\n$$\n\n##### 解题过程\n\n考虑 $\\sum\\limits_{\\forall p} f(p)$，对任意 $p_i, a_i, a_i p_i$ 在全部排列中出现了 $(n-1)!$ 次，故\n$$\n\\sum\\limits_{\\forall p} f(p) = (1 + 2 + 3 + \\ldots + n) (n-1)! \\times \\sum\\limits_{i=1}^n a_i\n$$\n$$\n= \\frac{n(n+1)}{2} (n-1)! \\times \\sum\\limits_{i=1}^n a_i\n$$\n$$\n= n! \\times \\sum\\limits_{i=1}^n a_i \\times \\frac{n+1}{2}\n$$\n由于n为奇数，$\\frac{n+1}{2}$为整数，则说明 $\\sum\\limits_{\\forall p} f(p)$ 为 $n!$ 的倍数。\n\n共有 $P(n,n) = n!$ 种排列，首先假设这 $n!$ 种排列得到的 $f(p)$ 值模 $n!$ 的值各不相同，即分别为 $0, 1, \\ldots, n! - 1$，此时将上述余数两两配对，可知 $\\sum\\limits_{\\forall p} f(p)$ 模 $n!$ 为 $\\frac{n!}{2}$，与前述结论矛盾，故这些排列中至少有两个排列 $p, q$ 满足 $f(p) \\equiv f(q) \\pmod{n!}$，即 $f(p) - f(q)$ 是 $n!$ 的倍数。因此，存在两个不同的排列 $p, q$，使得 $f(p) - f(q)$ 是 $n!$ 的倍数。\n\n##### 难度评价：适中",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "\\sum_{p} f(p) = \\sum_{i = 1}^n a_i (n - 1)! \\sum_{j = 1}^n j = \\frac{n + 1}{2} n! \\sum_{i = 1}^n a_i\n",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中正确计算了 $\\sum_{p} f(p)$ 的表达式，即 $\\sum_{p} f(p) = \\frac{n + 1}{2} n! \\sum_{i = 1}^n a_i$，与标准答案一致。因此，该部分得分为3分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "若不存在$f(p) - f(q)$是$n!$的倍数，则$f(p)$模$n!$的取值遍历$0, 1, 2, \\cdots, n! - 1$",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中正确地假设了若不存在$f(p) - f(q)$是$n!$的倍数，则$f(p)$模$n!$的取值遍历$0, 1, 2, \\cdots, n! - 1$，并且通过矛盾证明了原命题成立。因此，该部分得分为2分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "\\sum_{p} f(p) \\bmod n! = \\sum_{i = 0}^{n! - 1} i \\bmod n! = \\frac{n! (n! - 1)}{2} \\bmod n!\n ",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中正确计算了 $\\sum_{p} f(p) \\bmod n!$ 的值，并得出了 $\\frac{n! (n! - 1)}{2} \\bmod n!$ 的结论，与标准答案一致。因此，该评分点得满分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "当$n \\geq 2$时$n!$是偶数，而$n$是奇数，因此式~\\eqref{equ:1} 模$n!$的余数为$0$，而式~\\eqref{equ:2} 显然非零，矛盾",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中正确推导了$\\sum\\limits_{\\forall p} f(p)$为$n!$的倍数，并假设$f(p)$模$n!$的值各不相同，得出矛盾，从而证明了存在两个不同的排列$p, q$使得$f(p) - f(q)$是$n!$的倍数。这一过程与标准答案中的关键步骤一致，符合评分规则。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "注意到\\n    %\\n    \\begin{equation}\n        \\label{equ:1}\n        \\sum_{p} f(p) = \\sum_{i = 1}^n a_i (n - 1)! \\sum_{j = 1}^n j = \\frac{n + 1}{2} n! \\sum_{i = 1}^n a_i\n    \\end{equation}\n    %\\n    若不存在$f(p) - f(q)$是$n!$的倍数，则$f(p)$模$n!$的取值遍历$0, 1, 2, \\cdots, n! - 1$。这意味着\\n    %\\n    \\begin{equation}\n        \\label{equ:2}\n        \\sum_{p} f(p) \\bmod n! = \\sum_{i = 0}^{n! - 1} i \\bmod n! = \\frac{n! (n! - 1)}{2} \\bmod n!\n    \\end{equation}\n    %\\n    当$n \\geq 2$时$n!$是偶数，而$n$是奇数，因此式~\\eqref{equ:1} 模$n!$的余数为$0$，而式~\\eqref{equ:2} 显然非零，矛盾。\\n    故原命题成立。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "2.13": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "平面上有6个整点 $(x_i, y_i)$，满足 $|x_i|, |y_i| \\leq 2$（$i = 1, 2, 3, 4, 5, 6$）。证明：必能从中选取3个点构成三角形，其面积不超过2（若三点共线，面积即视为0）。\n\n##### 解题过程\n\n反证法，假设任取3个点构成的三角形面积都大于2。\n\n由于是整点，因此6个点落在$5 \\times 5 = 25$个格点上，根据鸽巢原理，必有至少2个点落在同一行，且至少2个点落在同一列。\n\n先考虑落在同一行的两个点，记为 $(x_1, y_1), (x_2, y_1)$，则其余四个点首先必然不落在 $y = y_1$ 上，否则这三个点共线，面积为0，与假设矛盾；其次，必然不落在 $y = y_1 - 1$ 或 $y = y_1 + 1$ 上，否则若有，则这三个点的面积为 $\\frac{1}{2} |x_1 - x_2| \\leq 2$，与假设矛盾。\n\n根据上述结论，如果 $y_1 = 1$，那么其余四个点必然落在 $y = -2, y = -1$ 这相邻两行，同理，必然存在三个点构成面积不超过2的三角形，矛盾，故 $y_1 \\neq 1$，同理，$y_1 \\neq -1$。\n\n若 $y_1 = 0$，则显然剩下4个点只能两两分别落在 $y = 2$ 和 $y = -2$ 上。\n\n若 $y_1 = \\pm2$，那么剩下4个点分布在远离 $y = y_1$ 的3行上，根据鸽巢原理，至少2点共行，显然同上理，这行不能为 $y = \\pm1$，因此剩下四个点两两分别落在 $y = 0$ 和 $y = -y_1$ 两行上。\n\n综上，只能6个点两两一组分别落在 $y = 2, y = 0, y = -2$ 上，此时考虑同列两点，同上理，6个点也只能两两一组分别落在 $x = 2, x = 0, x = -2$ 上。\n\n因而此时6个点只能落在 $(\\pm2, 0), (0, \\pm2), (\\pm2, \\pm2), (0, 0)$ 这9个点上，且每行每列各2个点。\n\n又有，对每行的2个点，不能距离为2，否则另选取与这行距离为2的另一行上的2个点的其中一个构成三角形，面积为 $\\frac{1}{2} \\times 2 \\times 2 = 2$，与假设矛盾。\n\n故每行的2个点横坐标均为 $2, -2$，而此时又有 $(2, 2), (2, 0), (2, -2)$ 三点共线，矛盾。\n\n因此，假设不成立，即存在3个点构成三角形面积不超过2。\n\n##### 难度评价：适中",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "用反证法，先假设所有三角形大小都大于$2$",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中明确使用了反证法，假设所有三角形面积都大于2，符合评分规则的要求。因此，该部分得分为1。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "由此易见$x$轴上必恰有两点",
+                    "score": 3,
+                    "graded_score": 0,
+                    "process": "学生答案中并未明确指出$x$轴上必恰有两点，而是通过复杂的推理过程间接得出了类似的结论。虽然最终结论与标准答案一致，但未直接满足评分规则中的明确要求，因此不能得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "同理，$y$轴上也恰有两点",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中未明确提到$y$轴上恰有两点，因此不符合评分规则中的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "以上四点中，若某一点距原点距离为$1$，则该点与另一轴上两点构成三角形面积必不大于$2$，因此这四点坐标必为$(\\pm 2, 0)$和$(0, \\pm 2)$",
+                    "score": 3,
+                    "graded_score": 0,
+                    "process": "学生答案中未明确提到四点坐标必为$(\\pm 2, 0)$和$(0, \\pm 2)$，因此不符合评分规则中的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "现在任取一个位于某一象限中的点，该点和与该象限相邻两半轴上的两点构成三角形面积必不超过$2$，矛盾",
+                    "score": 2,
+                    "graded_score": 0,
+                    "process": "学生答案中未明确提到任取一个位于某一象限中的点，该点和与该象限相邻两半轴上的两点构成三角形面积必不超过2，矛盾。因此，未能满足评分规则中的关键点。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "用反证法，先假设所有三角形大小都大于$2$。\\n    由此易见$x$轴上必恰有两点：\\n    %\\n    \\begin{itemize}\n        \\item 若有至多一点，则由鸽巢原理，$x$轴某一侧有三点，因为其均为整点，显然其为顶点的三角形大小不超过$2$；\\n        \\item 若有至少三点，则这三点直接构成零面积三角形。\\n    \\end{itemize}\n    %\\n    同理，$y$轴上也恰有两点。\\n    以上四点中，若某一点距原点距离为$1$，则该点与另一轴上两点构成三角形面积必不大于$2$，因此这四点坐标必为$(\\pm 2, 0)$和$(0, \\pm 2)$。\\n    现在任取一个位于某一象限中的点，该点和与该象限相邻两半轴上的两点构成三角形面积必不超过$2$，矛盾。\\n\\n    \\emph{此题结论可加强，实际上各点的坐标不必为整数，结论仍然成立。对这一问题有兴趣的同学可自行搜索Heilbronn Triangle Problem或阅读杨路、张景中、曾振柄先生发表于1992年的论文《最初几个Heilbronn数的猜想和计算》。}",
+            "trace": null,
+            "final_graded_score": 1,
+            "total_score": 10
+        }
+    },
+    "2.14": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "设$m, n$是任意正整数，$M$是$1, 2, \\ldots, m$的最小公倍数，且$n+1$不能被$M$整除。证明：存在$x, y \\in \\{1, 2, \\ldots, m\\}$，满足$x \\neq y$，且 $n \\mod x = n \\mod y$。\n\n##### 解题过程\n\n反证法，假设对于任意$x, y \\in \\{1, 2, \\ldots, m\\}$，若$x \\neq y$，则有$n \\mod x \\neq n \\mod y$。\n\n$n \\mod 1 \\equiv 0$，故 $n \\mod 2 \\neq 0$，即 $n \\mod 2 = 1$。\n\n故 $n \\mod 3 \\neq 0, 1$，即 $n \\mod 3 = 2$。\n\n故 $n \\mod 4 \\neq 0, 1, 2$，即 $n \\mod 4 = 3$，……\n\n即 $n \\mod i = i - 1$，$i \\in \\{1, 2, \\ldots, m\\}$。\n\n则 $(n + 1) \\mod i = 0$，$i \\in \\{1, 2, \\ldots, m\\}$，即 $n + 1$ 是 $1, 2, \\ldots, m$ 的公倍数。\n\n然而，$M$ 是 $1, 2, \\ldots, m$ 的最小公倍数，因此 $n + 1$ 被 $M$ 整除，与题设条件矛盾。\n\n因此，假设不成立，所以存在 $x, y \\in \\{1, 2, \\ldots, m\\}$，满足 $x \\neq y$，且 $n \\mod x = n \\mod y$。\n\n##### 难度评价：简易",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "$n \\bmod 2 = 1$、$n \\bmod 3 = 2$、……，直至$n \\bmod m = m - 1$",
+                    "score": 7,
+                    "graded_score": 7,
+                    "process": "学生答案中详细推导了$n \\bmod 2 = 1$、$n \\bmod 3 = 2$、……，直至$n \\bmod m = m - 1$的过程，与标准答案一致，符合评分规则。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "如此即有$(n + 1) \\bmod M = 0$，矛盾。",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中详细地使用了反证法，并正确地推导出$(n + 1) \\bmod M = 0$，与题设条件矛盾，符合评分规则的要求。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "若已知$x \\neq y \\; \\Rightarrow \\; n \\bmod x \\neq n \\bmod y$，则由$n \\bmod 1 = 0$可依次推得$n \\bmod 2 = 1$、$n \\bmod 3 = 2$、……，直至$n \\bmod m = m - 1$。\\n    如此即有$(n + 1) \\bmod M = 0$，矛盾。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "2.15": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "有101个正整数，其和为300，证明其中某些数之和恰好为200。\n\n##### 解题过程\n\n首先，显然题目等价于证明存在某些数之和恰好为200。\n\n反证法，假设不存在任何数之和为200或100。\n\n定义前 $k$ 个数的部分和为：\n$$\nS_k = a_1 + a_2 + \\ldots + a_k \\quad (1 \\leq k \\leq 101)\n$$\n\n定义 $S'_k = S_k \\mod 100$，有 $S'_k \\in \\{0, 1, 2, 3, \\ldots, 99\\}$，根据鸽巢原理，必有两个 $S'_k$ 相等，即 $\\exists i, j$，其中 $1 \\leq i < j \\leq 101$，使得 $S'_j = S'_i$。\n\n因此，$S_j - S_i \\equiv 0 \\pmod{100}$。\n\n因为 $a_i$ 均为正整数，故 $S_j > S_i$，即 $S_j - S_i \\geq 1$。\n\n又由于假设不存在和为100或200，且 $S_j - S_i \\leq 300 - 1 = 299$。\n\n考虑 $S_j - S_i \\neq 100, 200, 300$，但由于 $S_j - S_i \\equiv 0 \\pmod{100}$，只能是 $100$ 或 $200$。\n\n这与假设矛盾。\n\n故假设不成立，存在某些数之和恰好为200。\n\n##### 难度评价：适中",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "将$101$个正整数排成一列，其前缀和数列为$S_1, S_2, \\cdots, S_{101}$",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中明确提到了将101个正整数排成一列，并定义了前缀和数列$S_1, S_2, \\cdots, S_{101}$，符合评分规则的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "考虑其中各项模$100$的余数，其中必有两项相等",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中明确提到了考虑各项模100的余数，并应用了鸽巢原理，指出必有两项相等。这一点与标准答案中的要求完全一致，因此得分为3分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "因此存在连续若干元素之和是$100$的倍数，可能的取值为$100$或$200$",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中明确指出了存在连续若干元素之和是100的倍数，可能的取值为100或200，这与标准答案中的关键步骤一致。因此，该部分得分为3分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "若为$100$，即证；若为$200$，则其余元素之和为$100$，同样可证。",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中详细描述了使用反证法和鸽巢原理来证明存在某些数之和恰好为200的过程。虽然学生没有明确提到若为100的情况，但其推理过程已经涵盖了标准答案中的关键步骤，并且逻辑严密。因此，可以认为学生答案符合评分标准。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "将$101$个正整数排成一列，其前缀和数列为$S_1, S_2, \\cdots, S_{101}$。\\n    考虑其中各项模$100$的余数，其中必有两项相等，因此存在连续若干元素之和是$100$的倍数，可能的取值为$100$或$200$。\\n    若为$100$，即证；若为$200$，则其余元素之和为$100$，同样可证。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    }
+}

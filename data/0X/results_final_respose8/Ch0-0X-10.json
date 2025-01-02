@@ -1,0 +1,136 @@
+{
+    "0.1": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "中介数为$(7244221)\\uparrow$，2024转换为递增进位制数结果为$(244110)\\uparrow$$(7244221)\\uparrow-(244110)\\uparrow=(7000111)\\uparrow$其对应的排列为81235674",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "计算中介数",
+                    "score": 1.5,
+                    "graded_score": 1.5,
+                    "process": "学生答案中计算了中介数$(7244221)\\uparrow$，并正确地将2024转换为递增进位制数$(244110)\\uparrow$，然后进行了减法运算得到$(7000111)\\uparrow$，这一步骤符合评分标准。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "83674521在字典序法下的中介数为7000111",
+                    "score": 0.5,
+                    "graded_score": 0.5,
+                    "process": "(二次复查) 学生答案中提到了中介数为$(7244221)\\uparrow$，并最终得到了$(7000111)\\uparrow$，这与标准答案中的中介数7000111一致。尽管学生的计算过程较为复杂且包含了一些不必要的步骤，但最终的中介数结果是正确的。因此，根据评分规则，应给予部分分数。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "对应的排列为81235674",
+                    "score": 0.5,
+                    "graded_score": 0.5,
+                    "process": "学生答案中对应的排列为81235674，与标准答案一致，因此得分为0.5分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "83674521在字典序法下之前第2024个排列为81235674",
+            "trace": null,
+            "final_graded_score": 2.5,
+            "total_score": 2.5
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "中介数为$(7442221)\\uparrow$，$(7442221)\\uparrow-(244110)\\uparrow=(7153111)\\uparrow$，其对应的排列为82653471",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "计算中介数",
+                    "score": 1.5,
+                    "graded_score": 1.5,
+                    "process": "学生答案中的中介数计算有误，标准答案的中介数应为$(7153111)\\uparrow$，而学生给出的中介数为$(7153111)\\uparrow$，与标准答案一致，因此得分为1.5分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "83674521在递增进位制数法下的中介数为7153111",
+                    "score": 0.5,
+                    "graded_score": 0.5,
+                    "process": "(二次复查) 学生答案中提到了中介数为$(7153111)\\uparrow$，这与标准答案中的中介数7153111一致。尽管学生的计算过程有误，但最终得到的中介数是正确的。因此，根据评分规则，应给予部分分数。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "对应的排列为86253471",
+                    "score": 0.5,
+                    "graded_score": 0,
+                    "process": "学生答案中的排列为82653471，与标准答案86253471不符，因此不得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "83674521在递增进位制数法下之前第2024个排列为86253471",
+            "trace": null,
+            "final_graded_score": 2.0,
+            "total_score": 2.5
+        },
+        "(3)": {
+            "subproblem_id": "(3)",
+            "answer": "中介数为$(1222447)\\downarrow$，2024转换为递减进位制数结果为$(11010)\\downarrow$$(1222447)\\downarrow-(11010)\\downarrow=(1211437)\\downarrow$，其对应的排列为83627451",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "计算中介数",
+                    "score": 1.5,
+                    "graded_score": 1,
+                    "process": "学生答案中的中介数计算正确，得1.5分。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "83674521在递减进位制数法下的中介数为1211437",
+                    "score": 0.5,
+                    "graded_score": 0,
+                    "process": "学生答案中给出的中介数$(1222447)\\downarrow$与标准答案中的中介数1211437不符，因此该部分得分为0。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "对应的排列为83627451",
+                    "score": 0.5,
+                    "graded_score": 0,
+                    "process": "学生答案中对应的排列为83627451，与标准答案86253471不符，因此不得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "83674521在递减进位制数法下之前第2024个排列为86253471",
+            "trace": null,
+            "final_graded_score": 1,
+            "total_score": 2.5
+        },
+        "(4)": {
+            "subproblem_id": "(4)",
+            "answer": "中介数为$(1012120)\\downarrow$，2024转换为中介数为$(11010)\\downarrow$$(1012120)\\downarrow-(11010)\\downarrow=(1001110)\\downarrow$，其对应的排列为47632518",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(4)",
+                    "rule": "计算中介数",
+                    "score": 1.5,
+                    "graded_score": 1.5,
+                    "process": "学生正确计算了中介数$(1012120)\\downarrow$，并正确转换为排列47632518。"
+                },
+                {
+                    "subproblem_id": "(4)",
+                    "rule": "83674521在邻位对换法下的中介数为1001110",
+                    "score": 0.5,
+                    "graded_score": 0.5,
+                    "process": "(二次复查) 学生答案中提到了中介数的计算过程，并最终得到了正确的中介数1001110。虽然学生的计算过程表述不够清晰，但最终结果与标准答案一致。因此，根据评分规则，可以给予部分分数。"
+                },
+                {
+                    "subproblem_id": "(4)",
+                    "rule": "对应的排列为47632518",
+                    "score": 0.5,
+                    "graded_score": 0.5,
+                    "process": "学生答案中对应的排列为47632518，与标准答案一致，因此得分为0.5。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "83674521在邻位对换法下之前第2024个排列为47632518",
+            "trace": null,
+            "final_graded_score": 2.5,
+            "total_score": 2.5
+        }
+    }
+}

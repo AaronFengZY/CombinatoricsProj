@@ -1,0 +1,606 @@
+{
+    "1.13": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "\\item 首先，选择一个顶点作为两条对角线相交的顶点，共有 $n$ 种方案。 其次，在除该顶点相邻的两个顶点中，选择两个顶点作为两条对角线的另一个顶点，共有 $C_{n-3}^{2}$ 种方案。 因此，共有 $nC_{n-3}^{2}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "选中任意一点作为公共点",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案正确地选择了任意一点作为公共点，并计算了从该点出发的两条对角线的方案数，符合评分规则。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "剩下的选两个",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案正确地选择了两个顶点作为两条对角线的另一个顶点，符合评分规则中的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案与标准答案完全一致，正确选择了顶点并计算了组合数，得1分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 选定多边形上一点，从这点出发作两条对角线，除去与这点相邻的两个顶点外，共有$n - 3$个顶点可选，因此方案数为$n \\binom{n - 3}{2}$；",
+            "trace": null,
+            "final_graded_score": 4,
+            "total_score": 4
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "\\item 首先，选择四个顶点作为两条不相交对角线的顶点。对于一条对角线，共有 $C_{n}^{2}-n$ 种方案（去掉顶点相邻情况），则对于另一条对角线，共有 $C_{n-2}^{2}-(n-2)$ 种方案。考虑去除每条对角线选取的先后顺序，共有 $\\frac{(C_{n}^{2}-n)(C_{n-2}^{2}-(n-2)+2)}{2}$ 种方案。 其次，去除由四个顶点构成两条对角线相交的情况。因为任意四个顶点可以构成且仅可以构成一组相交的对角线，所以共有 $C_{n}^{4}$ 种方案。 因此，共有 $\\frac{(C_{n}^{2}-n)(C_{n-2}^{2}-n+4)}{2}-C_{n}^{4}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "对角线数量正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中正确计算了对角线的数量，得1分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "任取两条对角线数量正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "(二次复查) 学生答案中提到了选择两条不相交对角线的顶点，并计算了选择两条对角线的方案数。虽然学生的计算过程与标准答案不完全一致，但学生确实提到了选择两条对角线的思路，并且考虑了去除相交对角线的情况。这表明学生对问题的理解有一定的正确性，尽管具体计算步骤有误。因此，可以酌情给予部分分数。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "公共顶点数量正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中未正确计算公共顶点数量，且方案数计算错误，未能正确去除相交对角线的情况。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "与答案等价",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案与标准答案不等价。学生答案中的计算方法和表达式与标准答案不一致，且未正确推导出最终结果。因此，无法获得与答案等价的分值。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "结果化简",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案未进行结果化简，与标准答案不符，因此不得分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 多边形对角线共有$\\binom{n}{2} - n$条，从中选出两条共有$\\binom{\\binom{n}{2} - n}{2}$种方案。 若这两条对角线有公共点，则或者在顶点上，或者在多边形内部；公共点在顶点上的方案数已在第(1)问种求出。 若公共点在内部，则两条对角线即为其四个顶点所确定的四边形的两条对角线，方案数为$\\binom{n}{4}$。 综上，总方案数为 % \\begin{align*} & \\binom{\\binom{n}{2} - n}{2} - n \\binom{n - 3}{2} - \\binom{n}{4} \\\\ & = \\frac{1}{8} ( n^2 - 3n ) ( n^2 - 3n - 2 ) - \\frac{1}{2} n (n - 3) (n - 4) - \\frac{1}{24} n (n - 1) (n - 2) (n - 3) \\\\ & = \\frac{n (n - 3)}{24} \\left[ 3(n^2 - 3n - 2) - 12(n - 4) - (n - 1)(n - 2) \\right] \\\\ & = \\frac{n (n - 3)}{24} \\left( 2n^2 - 18n + 40 \\right) \\\\ & = \\frac{n (n - 3) (n - 4) (n - 5)}{12} = \\frac{n}{2} \\binom{n - 3}{3} \\end{align*}",
+            "trace": null,
+            "final_graded_score": 2,
+            "total_score": 5
+        }
+    },
+    "1.14": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "\\begin{equation*} a_{60} = 20^{20} = 2^{40} \\times 5^{20} \\end{equation*} 故 $a_i$ 可以表示为 $a_{i} = 2^{p_{i}} \\times 5^{q_{i}}\\ (0 \\le p_{i} \\le 40, 0 \\le q_{i} \\le 20)$。 \\begin{enumerate}[label=(\\arabic*)] \\item 当 $p_{i}, q_{i}$ 单调递增时，数列中每一项都是其后面一项的约数。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "分解$20^{20}$",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案正确分解了$20^{20}$为$2^{40} \\times 5^{20}$，符合评分标准。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中正确地将$a_{60}$表示为$2^{40} \\times 5^{20}$，并指出$a_i$可以表示为$2^{p_i} \\times 5^{q_i}$，且$p_i$和$q_i$单调递增时，数列中每一项都是其后面一项的约数。这些内容与标准答案一致，因此得分为3分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "$20^{20} = 2^{40} \\dotp 5^{20}$。 \\begin{enumerate}[label={\\rm (\\arabic*)}] \\item 每一项中含有$2$的幂次和$5$的幂次分别单调递增。 以$2$的幂次为例，可想象成是走$58 \\times 40$的格路，路径在$x = i - 2$处的最大$y$坐标即为$a_i$中$2$的幂次；对于$5$也类似。 总的方案数为$\\binom{98}{40} \\binom{78}{20}$；",
+            "trace": null,
+            "final_graded_score": 4,
+            "total_score": 4
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "因此，共有 $C_{59+40-1}^{40}C_{59+20-1}^{20}=C_{98}^{40}C_{78}^{20}$ 种方案。 \\item 将问题转化为在平面网格中，从 $(0,0)$ 走 59 步到达 $(40,20)$，其中一步可以在 $x$ 或 $y$ 方向上走两格或在 $x$ 和 $y$ 方向上各走一格，剩余步可以在 $x$ 或 $y$ 方向上走一格。 因此，共有 $C_{59}^{40}C_{19}^{1} + C_{59}^{20}C_{39}^{1} + C_{59}^{1}C_{58}^{19}$ 种方案。",
+            "status": "error",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "讨论数列形式",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案未讨论数列形式，与标准答案不符，因此不得分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "情况1正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中未正确列出情况1的表达式，且未按照标准答案中的三种情况进行分类讨论，因此不符合评分规则中的情况1正确的要求。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "情况2正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中未正确列出情况2的表达式，与标准答案不符，因此不得分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "情况3正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中未正确列出情况3的表达式，与标准答案不符，因此不得分。"
+                },
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案与标准答案不符，未正确列出三种情况及其对应的组合数，且未正确计算总数。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 讨论数列$\\left\\{ \\frac{a_{i+1}}{a_i} \\right\\}$（$1 \\leq i \\leq 59$），该数列的组成有三种情况： % \\begin{itemize} \\item $38$个$2$、$20$个$5$、$1$个$4$，有$59 \\binom{58}{20}$种情况； \\item $39$个$2$、$19$个$5$、$1$个$10$，有$59 \\binom{58}{19}$种情况； \\item $40$个$2$、$18$个$5$、$1$个$25$，有$59 \\binom{58}{18}$种情况。 \\end{itemize} % 因此，总共有$59 \\left[ \\binom{58}{18} + \\binom{58}{19} + \\binom{58}{20} \\right]$种情况。",
+            "trace": "二次复查后仍为 0 分",
+            "final_graded_score": 0,
+            "total_score": 5
+        }
+    },
+    "1.15": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "23 个不同物体排列数为 $P_{23}^{23}$。从 25 个箱子中选 2 个空箱子，共有 $C_{25}^{2}$ 种方案，其中两个空箱子相邻的情况共有 24 种。 因此，共有 $(C_{25}^{2}-24)P_{23}^{23}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "得到正确的不相邻方案数",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案中正确计算了不相邻的空箱子方案数，即从25个箱子中选2个空箱子，减去相邻的24种情况，得到$C_{25}^{2}-24$，这与标准答案中的$\\binom{24}{2}$等价。因此，学生答案在得到正确的不相邻方案数这一评分点上得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "考虑物体的排列",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中正确考虑了物体的排列，得2分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案中，物体排列数计算正确，但选择空箱子的方法有误。标准答案要求选择两个不相邻的空箱子，而学生答案中计算了所有选择两个空箱子的情况，并减去相邻的情况，这与标准答案的思路一致，但计算方式不同。学生答案最终得出的方案数与标准答案一致，因此答案正确。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "共有$\\binom{24}{2}$种方案选择两个不相邻的空箱子，然后排列所有物体，方案数为$\\binom{24}{2} \\dotp 23! = \\frac{23 \\dotp 24!}{2}$。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "1.16": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "\\item 假设任意两条直线都相交且交点互不相同，共有 $C_{n}^{2}$ 个交点。 每个交点会将两条直线各分为两段，则圆内共有 $n + 2C_{n}^{2}$ 条线段。 圆周上共有 $2n$ 个线段和交点。 由欧拉公式 $V + F - E = 1$ 可得： \\begin{equation*} F = 1 + 2n + n + 2C_{n}^{2} - 2n - C_{n}^{2} = C_{n}^{2} + n + 1 \\end{equation*}",
+            "status": "error",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "每条直线增加区域数量正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中使用了欧拉公式来计算区域数，但并未正确应用直线分圆的基本原理。标准答案明确指出每增加一条直线，区域数增加的数量等于该直线被之前直线分割的段数，即第i条直线增加i个区域。学生答案中未正确体现这一关键步骤，因此未能得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案与标准答案不一致，学生使用了欧拉公式进行计算，但标准答案直接通过直线分割区域的方式得出结果。因此，学生答案错误。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 依次画出每一条直线，第$i$条直线被之前的直线分为$i$段，每段均将一个原本的区域一分为二，因此总区域数为$1 + \\sum_{i = 1}^n i = \\frac{n^2 + n + 2}{2}$；",
+            "trace": "二次复查后仍为 0 分",
+            "final_graded_score": 0,
+            "total_score": 2
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "\\item 观察到圆上四个任意的点一定能连接出一组相交的弦，同时圆内任意一个交点一定由两条弦相交得到。 因此，圆周上每四个点和一个圆内交点一一对应，共有 $C_{n}^{4}$ 个交点。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案正确解释了圆周上每四个点对应一个圆内交点的关系，并得出了正确的交点数目为 $C_{n}^{4}$。因此，答案正确。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 任取圆周上四点均可作一对交于一点的对角线（思路与习题1.13(2)类似），因此总交点数即为$\\binom{n}{4}$；",
+            "trace": null,
+            "final_graded_score": 1,
+            "total_score": 1
+        },
+        "(3)": {
+            "subproblem_id": "(3)",
+            "answer": "\\item 有 0 个顶点在圆上的三角形和圆周上的 6 的点一一对应，共有 $C_{n}^{6}$ 种方案。 有 1 个顶点在圆上的三角形对应圆周上 5 个点，同时圆周上每 5 个点可以画出 5 个不同的有 1 个顶点在圆上的三角形。因此，共有 $5C_{n}^{5}$ 种方案。 有 2 个顶点在圆上的三角形对应圆周上 4 个点，同时圆周上每 4 个点可以画出 4 个不同的有 2 个顶点在圆上的三角形。因此，共有 $4C_{n}^{4}$ 种方案。 有 3 个顶点在圆上的三角形和圆周上的 3 的点一一对应，共有 $C_{n}^{3}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "3个顶点在圆上的情况正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "3个顶点在圆上的情况正确，得1分。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "2个顶点在圆上的情况正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中关于2个顶点在圆上的三角形的情况描述正确，与标准答案一致，得1分。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "1个顶点在圆上的情况正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中关于1个顶点在圆上的三角形的情况描述正确，与标准答案一致，得1分。"
+                },
+                {
+                    "subproblem_id": "(3)",
+                    "rule": "0个顶点在圆上的情况正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "0个顶点在圆上的情况正确，得1分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 分类讨论： % \\begin{itemize} \\item $0$个点在圆上：任取圆上六点，顺时针编号为$A, B, \\cdots, F$，则$AD, BE, CF$三条对角线恰能交出一个三顶点均不在圆上的三角形，因此方案数为$\\binom{n}{6}$； \\item $1$个点在圆上：任取圆上五点，顺时针编号为$A, B, \\cdots, E$，选定$A$为圆上一点（$B, \\cdots, E$同理）， 则$AC, AD, BE$三条对角线恰能交出一个$1$个顶点在圆上的三角形，因此方案数为$5\\binom{n}{5}$； \\item $2$个点在圆上：任取圆上四点，顺时针编号为$A, B, C, D$，设$AC, BD$交于$O$，则$AOB, BOC, COD, DOA$是四个有$2$个顶点在圆上的三角形，因此方案数为$4\\binom{n}{4}$； \\item $3$个点在圆上：方案数显然为$\\binom{n}{3}$。 \\end{itemize}",
+            "trace": null,
+            "final_graded_score": 4,
+            "total_score": 4
+        },
+        "(4)": {
+            "subproblem_id": "(4)",
+            "answer": "\\item 圆内有 $C_{n}^{4}$ 个交点，圆上有 $n$ 个交点，共有 $C_{n}^{4} + n$ 个交点。 圆内有 $C_{n}^{2}$ 条弦，同时每个交点对应两条线段，因此圆内有 $C_{n}^{2} + 2C_{n}^{4}$ 个线段，圆上有 $n$ 条线段，共有 $C_{n}^{2} + 2C_{n}^{4} + n$ 条线段。 由欧拉公式 $V + F - E = 1$ 可得： \\begin{equation*} F = 1 + C_{n}^{2} + 2C_{n}^{4} + n - C_{n}^{4} - n = 1 + C_{n}^{2} + C_{n}^{4} \\end{equation*}",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(4)",
+                    "rule": "顶点数正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "顶点数正确，学生答案中正确计算了顶点数为 $C_{n}^{4} + n$，与标准答案一致，得1分。"
+                },
+                {
+                    "subproblem_id": "(4)",
+                    "rule": "边数正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中边数的计算与标准答案一致，正确计算了圆内的线段和交点对应的线段数量，因此得1分。"
+                },
+                {
+                    "subproblem_id": "(4)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中，顶点数、边数和面数的计算均正确，且最终答案与标准答案一致。因此，答案正确，得1分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 平面图的顶点数显然为$V = n + \\binom{n}{4}$。 平面图的边包含圆上$n$段，以及圆内$\\binom{n}{2}$条顶点连线，以及圆内每个交点将两条线段分别一分为二，因此$E = n + \\binom{n}{2} + 2\\binom{n}{4}$。 因此，$F = E - V + 1 = \\binom{n}{4} + \\binom{n}{2} + 1$。",
+            "trace": null,
+            "final_graded_score": 3,
+            "total_score": 3
+        }
+    },
+    "1.17": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "首先，从左侧 $n$ 个点和右侧 $n$ 个点中，各选 $k$ 个点，共有 $(C_{n}^{k})^{2}$ 种方案。 其次，左右交替连接 $2k$ 个点，同时去除回路方向，共有 $\\frac{(k-1)!k!}{2}$ 种方案。 因此，共有 $\\frac{(k-1)!k!}{2} \\times (C_{n}^{k})^{2}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "k=1情况正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案未提及k=1的情况，因此未得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "二分图回路在两侧各有k个点",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案正确地从二分图的每个部分各选出k个点，符合评分规则的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "使用交错序列计数",
+                    "score": 4,
+                    "graded_score": 2,
+                    "process": "学生答案中，从左侧和右侧各选k个点的方案正确，得2分。但交错连接2k个点的方案计算错误，应为(k!)^2 / (2k)，学生计算为(k-1)!k! / 2，因此扣2分。最终得分为2分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 0,
+                    "process": "学生答案中，从左侧和右侧各选k个点的方案正确，得1分。但在计算交替连接和去除回路方向的方案时，学生使用了错误的公式，导致最终答案错误，扣1分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "若$k = 1$，答案为$0$。 否则，从二分图的每个部分各选出$k$个点，然后将两组各$k$个点彼此间隔排成长度为$2k$的圆排列，最后注意到这样将每个回路一正一反计算了两次，因此答案为 % \\begin{equation*} \\frac{1}{2} \\dotp \\binom{n}{k}^2 \\dotp \\frac{(k)!}{k} = \\frac{(n!)^2}{2k \\left[ (n - k)! \\right]^2} \\end{equation*} % 由于题目可能有歧义，此答案乘上$2$（考虑方向）、$2k$（考虑起点）或$4k$（二者均考虑）也算对。",
+            "trace": null,
+            "final_graded_score": 6,
+            "total_score": 10
+        }
+    },
+    "1.18": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "记数字 $i$ 出现的次数为 $f_i$。 由于 $n$ 位正整数中，每一位都小于等于前一位，因为相同的数字一定相邻或只间隔相同的数字，如果每个数字出现的次数确定，那么构成的整数是确定的。 故问题等价于给定 $f_{1} + f_{2} + ... + f_{9} = n$，求解非负整数解个数。 因为，共有 $C_{n+8}^{8}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "发现题目的组合意义或列出不定方程",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案正确地发现了题目的组合意义，即将问题转化为求解非负整数解的不定方程，并给出了正确的组合数公式 $C_{n+8}^{8}$，这与标准答案中的 $\\binom{n + 8}{n}$ 完全一致。因此，学生答案完全符合评分规则的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 6,
+                    "graded_score": 6,
+                    "process": "学生答案正确地将问题转化为非负整数解的个数，并正确地使用了组合数公式，得出了与标准答案一致的结果。因此，答案正确，得6分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "等价于$\\left\\{ 1, 2, \\cdots, 9 \\right\\}$的$n$-可重组合，方案数为$\\binom{n + 8}{n}$。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "1.19": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "设其中一个人分得 $x$ 个甲物品，$y$ 个乙物品，和 $z$ 个丙物品，满足： \\begin{equation*} x+y+z=3n\\ (0 \\le x,y,z \\le 2n) \\end{equation*} 首先，考虑 $x,y$ 的全部组合，共有 $(2n+1)^{2}$ 种方案。 其次，减去不符合 $z$ 取值范围的组合，即： \\begin{equation*} x + y < n \\end{equation*} \\begin{equation*} x + y > 3n \\end{equation*} 共有 $2 \\times \\sum_{i=0}^{n-1}(n-i) = n(n-1)$ 种方案。 因此，共有 $(2n+1)^{2} - n(n-1) = 3n^2 + 3n + 1$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "总方案数正确",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案通过不同的方法得到了与标准答案相同的结果，即总方案数为 $3n^2 + 3n + 1$。虽然方法不同，但结果正确，因此得分为 4 分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "不满足条件的方案数正确",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案中，不满足条件的方案数计算正确，得分为4分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案与标准答案的最终结果一致，均为 $3n^2 + 3n + 1$，因此答案正确。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "等价于求$x + y + z = 3n$（$0 \\leq x, y, z \\leq 2n$）的非负整数解。 先不考虑限制条件，方案数为$\\binom{3n + 2}{2}$。 若$x, y, z$中任一变量不满足限制条件，不妨设为$x$，则设$x = 2n + 1 + x'$，于是有$x' + y + z = n - 1$，其非负整数解数目为$\\binom{n + 1}{2}$。 排除掉所有不满足限制条件的情况，最终答案即为 % \\begin{equation*} \\binom{3n + 2}{2} - 3 \\binom{n + 1}{2} = 3n^2 + 3n + 1 \\end{equation*}",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "1.20": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "将子串 $c_{1}c_{2}...c_{D}$ 看作一个整体，则字符串中共有 $n-Dk+k$ 个物品。从中选出 $k$ 个 $c_{1}c_{2}...c_{D}$，由于每个元素个数已经确定，可以使用多重全排列公式求解。 因此，共有 $\\frac{(n-Dk+k)!}{k!\\prod_{i=1}^{D}((f_{i}-k)!)}$。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "将$c_1 c_2 \\cdots c_D$打包成一个字符",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案正确地将子串 $c_1 c_2 \\cdots c_D$ 打包成一个字符，符合评分规则的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "剩下的字符位置方案数正确",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案正确地计算了剩下的字符位置方案数，使用了多重全排列公式，与标准答案一致。因此，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "剩下的字符排列方案数正确",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案正确地使用了多重全排列公式来计算剩下的字符排列方案数，与标准答案一致。因此，该部分得分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案与标准答案完全一致，均正确使用了多重全排列公式求解，得分为2分。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "若存在$f_i < k$，则方案数显然为$0$。 否则，先“打包”$k$个子串$c_1 c_2 \\cdots c_D$，然后在其中插入剩下的$n - kD$个字符。 安排剩下的字符位置的方案数为$\\binom{n - kD + k}{k}$，这些字符排列的方案数为$\\frac{(n - kD)!}{\\prod_{i = 1}^D (f_i - k)!}$，因此总的方案数即为 % \\begin{equation*} \\binom{n - kD + k}{k} \\frac{(n - kD)!}{\\prod_{i = 1}^D (f_i - k)!} = \\frac{(n - kD + k)!}{k! \\prod_{i = 1}^D (f_i - k)!} \\end{equation*}",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "1.21": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "\\item 对于所有脚，动作顺序固定为左脚袜子、左脚鞋子、右脚袜子、右脚鞋子；对于每种动作，有 $100!$ 种方案。 因此，共有 $(100!)^{4}$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 5,
+                    "graded_score": 5,
+                    "process": "学生答案中动作顺序描述有误，应为左脚袜子→右脚袜子→左脚鞋子→右脚鞋子，但学生描述为左脚袜子、左脚鞋子、右脚袜子、右脚鞋子。然而，最终方案数计算正确，为$(100!)^4$。因此，答案正确。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 顺序必须为左脚袜子→右脚袜子→左脚鞋子→右脚鞋子，每种衣物内部脚的顺序可以任一排列，因此方案数即为$(100!)^4$；",
+            "trace": null,
+            "final_graded_score": 5,
+            "total_score": 5
+        },
+        "(2)": {
+            "subproblem_id": "(2)",
+            "answer": "\\item 对于一对脚，动作顺序固定为左脚袜子、左脚鞋子、右脚袜子、右脚鞋子；对于所有脚的所有动作，有 $400!$ 种方案。 因此，共有 $\\frac{400!}{13^{100}}$ 种方案。",
+            "status": "error",
+            "rules": [
+                {
+                    "subproblem_id": "(2)",
+                    "rule": "答案正确",
+                    "score": 5,
+                    "graded_score": 0,
+                    "process": "学生答案中对于每一对脚的动作顺序描述正确，但方案数的计算错误，应为除以12而非13。因此，答案错误。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "\\item 每一对脚有$4!$种穿袜子、鞋子顺序，但是其中仅有$2$种合法，因此在无任何约束情况下的的方案数$400!$要对每一对脚均除以$12$，结果即为$\\frac{400!}{12^{100}}$。",
+            "trace": "二次复查后仍为 0 分",
+            "final_graded_score": 0,
+            "total_score": 5
+        }
+    },
+    "1.22": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "\\begin{equation*} P_{2n+2}^{n+1} = (n+2)(n+3)...(2n+1)(2n+2) = \\frac{P_{2n}^{n}(2n+1)(2n+2)}{n+1} = 2(2n+1)P_{2n}^{n} \\end{equation*} 其中 $2n+1$ 为奇数，不能整除 2。 若 $2^{k} | P_{2n}^{n}$，则有 $2^{k+1} | P_{2n+2}^{n+1}$。 因为 $2^{1} | 2 = P_{2}^{1}$，所以 $2^{n} = P_{2n}^{n}$， $k$ 最大值为 $n$。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "论证合理即可",
+                    "score": 10,
+                    "graded_score": 10,
+                    "process": "学生答案通过递推关系论证了$2^{k} | P_{2n}^{n}$，并得出$k$的最大值为$n$，与标准答案一致。论证过程合理，符合评分标准。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "注意到 % \\begin{equation*} P(2n, n) = \\frac{(2n)!}{n!} = \\frac{\\left( \\prod_{j = 1}^n 2j \\right) \\prod_{j = 1}^n (2j - 1)}{n!} = \\frac{2^n \\dotp n! \\dotp \\prod_{j = 1}^n (2j - 1)}{n!} = 2^n \\prod_{j = 1}^n (2j - 1) \\end{equation*} % 因此显然有$k = n$。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "1.23": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "反证法。假设存在一个正整数 $m$ 在此进制下的表示不唯一，则有： \\begin{equation*} m = \\sum_{i=1}^{k}c_{i}\\prod_{j=1}^{i-1}a_{j} = d_{0} + \\sum_{i=1}^{k}d_{i}\\prod_{j=1}^{i-1}a_{j} \\end{equation*} 其中： \\begin{equation*} 0 \\le c_{i},d_{i} < a_{i}, \\exists i, b_{i} \\neq c_{i} \\end{equation*} 记： \\begin{equation*} b_{1} = 1, b_{i} = \\prod_{j=1}^{i-1}a_{j} \\end{equation*} 则有： \\begin{equation*} m = \\sum_{i=1}^{k}c_{i}b_{i} = \\sum_{i=1}^{k}d_{i}b_{i} \\end{equation*} 假设在此进制下这两种方法不同的最高位为第 $p$ 位，设 $c_{p} > d_{p}$，则有： \\begin{equation*} \\sum_{i=0}^{k}c_{i}b_{i} - \\sum_{i=0}^{k}d_{i}b_{i} = \\sum_{i=0}^{p}(c_{i}-d_{i})b_{i} \\end{equation*} 由于： \\begin{equation*} 0 \\le c_{i},d_{i} < a_{i} \\end{equation*} \\begin{equation*} c_{p} > d_{p} \\end{equation*} 因此： \\begin{equation*} \\sum_{i=1}^{p}(c_{i}-d_{i})b_{i} \\ge b_{p} - \\sum_{i=1}^{p-1}(a_{i}-1)b_{i} = \\sum_{i=1}^{p-1}b_{i} > 0 \\end{equation*} 可得这两种表示方法数值大小不同，矛盾，证毕。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "有反证法",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案使用了反证法，符合评分规则的要求。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "找出不同的最高或最低位",
+                    "score": 4,
+                    "graded_score": 4,
+                    "process": "学生答案中正确地使用了反证法，并找出了不同的最高位，符合评分规则的要求。因此，得分为4分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "说明其他位不可能补上两者之差",
+                    "score": 5,
+                    "graded_score": 5,
+                    "process": "学生答案通过反证法证明了任意正整数在此进制下的表示唯一，详细说明了其他位不可能补上两者之差，符合评分标准。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "证明：设$1\\underbrace{00\\cdots0}_{k\\;\\mbox{\\footnotesize 个}\\;0}$表示的数字为$p_k$。 容易证明任意两个$k$位数之差的绝对值小于$p_k$。 现在假设某数在此进制下有$2$种不同的表示，设两种表示最高在第$k$位不同，则二者在这一位上至少相差$p_k$； 在更低位上二者需同样至少相差$p_k$才能使两种表示所代表的数字相等，然而根据之前的结论这是不可能的，从而导出矛盾。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    },
+    "1.24": {
+        "(1)": {
+            "subproblem_id": "(1)",
+            "answer": "首先，从 10 个点中选出 4 个，共有 $C_{10}^{4}$ 种方案。 其次，去除正四面体表面四个点共面的情况。共有 4 个面，每个面有 6 个顶点，共有 $4 \\times C_{6}^{4}$ 种方案。 最后，去除正四面体内部四个点共面的情况。一种是四个点均为棱中点，共有 3 种情况；另一种是三个点在一条棱上，一个点在相对的棱中点，共有 6 种情况。 因为，共有 $C_{10}^{4} - 4 \\times C_{6}^{4} - 6 - 3 = 141$ 种方案。",
+            "status": "graded",
+            "rules": [
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "任取四点方案数正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案中正确计算了任取四点的方案数，即 $C_{10}^{4} = 210$，符合标准答案的要求。因此，该部分得分为1分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "表面共面方案数正确",
+                    "score": 2,
+                    "graded_score": 2,
+                    "process": "学生答案中正确计算了表面共面方案数，即 $4 \\times C_{6}^{4}$，与标准答案一致，因此得分为2分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "四棱中点共面方案数正确",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中正确指出了四棱中点共面的方案数为3种，与标准答案一致，因此得3分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "一边三点与对棱中点共面方案数正确",
+                    "score": 3,
+                    "graded_score": 3,
+                    "process": "学生答案中正确计算了一边三点与对棱中点共面的方案数为6种，与标准答案一致，因此得3分。"
+                },
+                {
+                    "subproblem_id": "(1)",
+                    "rule": "答案正确",
+                    "score": 1,
+                    "graded_score": 1,
+                    "process": "学生答案与标准答案完全一致，计算过程和结果均正确。"
+                }
+            ],
+            "solution_id": 0,
+            "correct_answer": "任取四点有$\\binom{10}{4} = 210$种方案。 四点共四面体表面$4 \\binom{6}{4} = 60$种方案，四棱中点共面$3$种方案，一边三点与对边中点共面$6$种方案，合计$210 - 60 - 3 - 6 = 141$种方案。",
+            "trace": null,
+            "final_graded_score": 10,
+            "total_score": 10
+        }
+    }
+}

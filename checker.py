@@ -14,7 +14,7 @@ def load_faiss_retriever():
     embeddings = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
     
     # Load the index from local files
-    index_path = "/home/CombinatoricsProj/faiss_index"
+    index_path = "/home/v-zhifeng/HPE/CombinatoricsProj/faiss_index"
     if not os.path.isdir(index_path):
         raise ValueError(f"FAISS index folder not found at {index_path}.")
 
@@ -46,11 +46,11 @@ def main():
     # Parse command-line arguments for filtering and hyperparameters
     filter_hw_base = None
     filter_student_ids = []
-    num_responses = 1  # Default to 1 response per question
+    num_responses = 8  # Default to 8 response per question
 
     for arg in sys.argv[1:]:
         if arg.startswith("--hw_base="):
-            filter_hw_base = arg.split("=", 1)[1]
+            filter_hw_base = arg.split("=", 1)[1] # data/0X
         elif arg.startswith("--num_responses="):
             num_responses = int(arg.split("=", 1)[1])
         else:
@@ -77,6 +77,9 @@ def main():
             # Illustrative example for testing hw_base and student_id
             print(f"Testing hw_base: {hw_base}, student_id: {student_id}")
 
+            # Extract the "0X" part from hw_base
+            hw_base_suffix = os.path.basename(hw_base)
+
             # Construct paths
             ref_path = os.path.join(base_path, hw_base, "ref/ref.json")
             student_path = os.path.join(base_path, hw_base, f"testcases/{student_id}.json")
@@ -92,10 +95,10 @@ def main():
             # Load and check
             ref_pa = RefPA.from_json(ref_path)
             student_pa = StudentPA.load_raw(student_path)
-            student_pa = checker.check(ref_pa, student_pa, num_responses=num_responses)
+            student_pa = checker.check(ref_pa, student_pa, num_responses=num_responses, hw_base_suffix=hw_base_suffix)
 
             # Generate reports
-            results_dir = os.path.join(base_path, hw_base, "results")
+            results_dir = os.path.join(base_path, hw_base, "results_final_respose8")
             os.makedirs(results_dir, exist_ok=True)
             reporter = DefaultReporter(results_dir)
             reporter.generate_reports(student_pa, f"{student_id}.json", f"{student_id}.md")
